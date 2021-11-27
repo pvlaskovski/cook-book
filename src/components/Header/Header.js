@@ -7,9 +7,11 @@ function Header() {
     return (
         <header>
             <AppBar>
-                <Toolbar>
-                    <h1>Put logo here</h1>
+                <Toolbar className="toolbar-logo">
+                    <h1 className="logo">Put logo here</h1>
 
+                </Toolbar>
+                <Toolbar className="toolbar-nav">
                     <Button className="menuButton" color="inherit" component={Link} to="/register">Register</Button>
                     <Button color="inherit" component={Link} to="/login">Login</Button>
                     <Button color="inherit" component={Link} to="/logout">Logout</Button>
