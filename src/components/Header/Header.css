@@ -1,3 +1,7 @@
+.header{
+    position: static;
+}
+
 .toolbar-nav{
     margin-left: auto;
 }

@@ -6,7 +6,7 @@ function Header() {
 
     return (
         <header>
-            <AppBar>
+            <AppBar className="header">
                 <Toolbar className="toolbar-logo">
                     <h1 className="logo">Put logo here</h1>
 
