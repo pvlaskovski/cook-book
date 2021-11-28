@@ -6,7 +6,7 @@ const firebaseConfig = {
     storageBucket: "cook-book-fd3de.appspot.com",
     messagingSenderId: "393146157069",
     appId: "1:393146157069:web:eaa2a72d7b3f793e696d44"
-  };
-  
-  firebase.initializeApp(firebaseConfig);
-  
+};
+
+
+// firebase.initializeApp(firebaseConfig);
