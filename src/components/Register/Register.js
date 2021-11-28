@@ -20,7 +20,6 @@ export default function Register() {
         const password = data.get('password')
 
         firebaseService.register(email, password);
-
     };
 
     return (

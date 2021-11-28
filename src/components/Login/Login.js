@@ -1,3 +1,5 @@
+import firebaseService from '../../services/firebase';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -11,10 +13,11 @@ export default function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        
+        const email = data.get('email');
+        const password = data.get('password')
+
+        firebaseService.login(email, password);
     };
 
     return (
