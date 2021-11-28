@@ -35,8 +35,6 @@ const register = function (email, password) {
         });
 }
 
-
-
 const firebaseService = {
     login,
     register
@@ -45,10 +43,6 @@ const firebaseService = {
 
 export default firebaseService;
 
-
-// const app = initializeApp(firebaseConfig);
-
-// import { initializeApp } from 'firebase/app';
 
 // import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 // import firebaseConfig from '../config/firebase';
