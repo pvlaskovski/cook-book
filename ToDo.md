@@ -1,10 +1,16 @@
 # Login to display the cusotmer's name
 
-# Component to show how safe a password is
+# Done: Component to show how safe a password is
 
 # Add, edit, delete recepie
 
-# Like Recepie
+# Done Rate Recepie
+
+# Shopping list from recipe
+
+# Share recipe
+
+# Print and favourite recipe
 
 # Most popular recepies
 

@@ -3,7 +3,6 @@
     width: 80%;
     margin: 1em auto;
     padding: 1em;
-    background-color: lightgray;
 }
 
 .container{  
@@ -14,4 +13,22 @@
 
 .containerSection{
     width: 100%;
+}
+
+.topIcons{
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-left: auto;
+}
+
+.avatar{
+    position: absolute;
+    right: 0;
+    background-color: white;
+}
+
+.button{  
+    color: red;
+    padding: 1em;
 }

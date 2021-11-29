@@ -1,18 +1,40 @@
-import { Box, width } from "@mui/system";
-import { Container, Paper } from "@mui/material";
+import { Box } from "@mui/system";
+import { Container, Paper, Button } from "@mui/material";
+import Avatar from '@mui/material/Avatar';
+import FolderIcon from '@mui/icons-material/Folder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+import { useState } from "react";
 import './RecipeDetails.css';
 import CustomRating from "../CustomRating/CustomRating";
 
 function RecipeDetails() {
+    const [favourite, setFavourite] = useState(false);
+
+    function handleFavouriteClick (){
+        setFavourite(!favourite);
+    }
+
     return (
 
         <Paper className="paper" >
+            <Box className="topIcons">
+                <Avatar className="avatar">
+                    <Button className="button" onClick={handleFavouriteClick}>
+                        {favourite 
+                        ? <FavoriteIcon className="icon" />
+                        : <FavoriteBorderIcon className="icon" />
+                    }
+                        
+                    </Button>
+                </Avatar>
+            </Box>
+
             <h2>Name of the recepie</h2>
             <span>Author and date and time</span>
 
             <Container className="container">
-
                 <Box className="containerSection">
                     <p>Ingredients</p>
                     <ul>
@@ -23,8 +45,6 @@ function RecipeDetails() {
                         <li>1 beef tomato</li>
                     </ul>
                 </Box>
-
-
                 <Box className="containerSection">
                     <p>Steps</p>
                     <ol>
@@ -37,11 +57,7 @@ function RecipeDetails() {
                 </Box>
 
             </Container>
-           
-      
             <CustomRating />
-          
-            
         </Paper>
 
     )
