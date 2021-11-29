@@ -32,3 +32,14 @@
     color: red;
     padding: 1em;
 }
+
+/* .imageContainer{
+    max-height: 500px;
+    display: block;
+} */
+
+.image{
+    width: 100%;
+    height: auto; 
+    max-height: 400px; 
+}

@@ -56,8 +56,13 @@ function RecipeDetails() {
                     </ol>
                 </Box>
 
+                <Box className="imageContainer">
+                    <img className="image" src="https://www.freepnglogos.com/uploads/cake-png/cake-png-transparent-cake-images-pluspng-21.png" />
+                </Box>
+
             </Container>
             <CustomRating />
+
         </Paper>
 
     )
