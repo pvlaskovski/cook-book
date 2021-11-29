@@ -15,28 +15,29 @@
     width: 100%;
 }
 
-.topIcons{
+.topAvatarsContainer{
     position: relative;
-    top: 0;
+}
+
+.avatarsContainer{
+    position: absolute;
+    display: flex;
     right: 0;
-    margin-left: auto;
 }
 
 .avatar{
-    position: absolute;
-    right: 0;
     background-color: white;
 }
 
-.button{  
+.favButton{  
     color: red;
     padding: 1em;
 }
 
-/* .imageContainer{
-    max-height: 500px;
-    display: block;
-} */
+.editButton{
+    padding: 1em;
+}
+
 
 .image{
     width: 100%;

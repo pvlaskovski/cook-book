@@ -4,6 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { useState } from "react";
 import './RecipeDetails.css';
@@ -19,16 +20,24 @@ function RecipeDetails() {
     return (
 
         <Paper className="paper" >
-            <Box className="topIcons">
-                <Avatar className="avatar">
-                    <Button className="button" onClick={handleFavouriteClick}>
-                        {favourite 
-                        ? <FavoriteIcon className="icon" />
-                        : <FavoriteBorderIcon className="icon" />
-                    }
-                        
-                    </Button>
-                </Avatar>
+            <Box className="topAvatarsContainer">
+                <Box className="avatarsContainer">
+                    <Avatar className="avatar">
+                        <Button className="editButton">
+                            <EditIcon/>
+                        </Button>
+                    </Avatar>
+
+                    <Avatar className="avatar">
+                        <Button className="favButton" onClick={handleFavouriteClick}>
+                            {
+                                favourite
+                                    ? <FavoriteIcon className="icon" />
+                                    : <FavoriteBorderIcon className="icon" />
+                            }
+                        </Button>
+                    </Avatar> 
+                </Box>
             </Box>
 
             <h2>Name of the recepie</h2>
