@@ -13,3 +13,22 @@
 .css-eglki6-MuiLinearProgress-root{
     margin-top: 0.2em;
 }
+
+/* span.weak,
+span.medium,
+span.strong{
+    background-color: lightgray;
+} */
+
+
+span.weak>span{
+    background-color: red;
+}
+
+span.medium>span{
+    background-color: orange;
+}
+
+span.strong>span{
+    background-color: green;
+}
