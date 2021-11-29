@@ -1,5 +1,9 @@
 import firebaseService from '../../services/firebase';
 
+import { useState } from 'react';
+
+import './Register.css';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,8 +14,52 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import LinearProgress from '@mui/material/LinearProgress';
+
 
 export default function Register() {
+    // const [pwStrenght, setPwStrenght] = useState(null);
+    // const [pwStrenghtValue, setpwStrenghtValue] = useState(0);
+    const [pwStrenght, setPwStrenght] = useState({
+        class: null,
+        value: 0
+    });
+
+    const handlePassword = (event) =>{
+        let pw = event.currentTarget.value;
+        console.log(pw); 
+
+        //one Capital, One special, One number, One lower
+        const strongPasRegex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/gm;
+        const mediumPasRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{6,}$/gm;
+
+        if(pw.match(strongPasRegex)){
+            setPwStrenght(prevState => ({
+                ...prevState,
+                class: "strong",
+                value: 100
+            }));
+        }else if(pw.match(mediumPasRegex)){
+            setPwStrenght(prevState => ({
+                ...prevState,
+                class: "medium",
+                value: 66
+            }));
+        }else if(pw.length>0){
+            setPwStrenght(prevState => ({
+                ...prevState,
+                class: "weak",
+                value: 33
+            }));
+        }else{
+            setPwStrenght(prevState => ({
+                ...prevState,
+                class: null,
+                value: 0
+            }));
+        }
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -44,7 +92,14 @@ export default function Register() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField fullWidth name="password" label="Password" type="password" id="password" />
+                            <TextField fullWidth name="password" label="Password" type="password" id="password" onChange={handlePassword} />
+                        
+                            <LinearProgress variant="determinate" className={pwStrenght.class} value={pwStrenght.value}/>
+
+                            <Typography variant="body2" className={pwStrenght.class}>
+                                {pwStrenght.class ? `${pwStrenght.class} password` : ""}
+                            </Typography>
+                            
                         </Grid>
 
                         <Grid item xs={12}>

@@ -1,5 +1,5 @@
-import { Grid, Paper } from '@mui/material';
-import RecipeCard from '../RecepieCard/RecepieCard';
+import { Grid } from '@mui/material';
+import RecipeCard from '../RecipeCard/RecipeCard';
 
 function RecepiesGrid() {
     return (

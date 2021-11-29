@@ -13,11 +13,6 @@ import ShareIcon from '@mui/icons-material/Share';
 import { CardActionArea } from '@mui/material';
 
 function RecipeCard() {
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
 
     return (
         <Card>
