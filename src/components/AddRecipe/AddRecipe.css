@@ -1,0 +1,22 @@
+.container{
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+.container > *{
+    margin-bottom: 1em;
+}
+
+.selectContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.select {
+    min-width: 300px;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1em;
+}
