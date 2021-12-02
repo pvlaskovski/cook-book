@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import ButtonHover from './ButtonHover.js';
 
 function InsertItem() {
 
@@ -19,11 +20,17 @@ function InsertItem() {
         setItemsList(newItemsList)
     }
 
+
+
+
     const renderItems = function () {
         return itemsList.map((ingredient, index) => {
             return(
                 <>
-                    <TextField className="select"
+                    <ButtonHover>   
+                        {index}
+                    </ButtonHover>
+                    <TextField className=""
                         id={ingredient.item}
                         label="Item"
                         variant="outlined"
@@ -31,7 +38,7 @@ function InsertItem() {
                         fullWidth
                     />
                     <TextField
-                        className="select"
+                        className=""
                         id={ingredient.quantity}
                         label="Quantity"
                         variant="outlined"
