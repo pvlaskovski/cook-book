@@ -1,8 +1,9 @@
 
-import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem } from '@mui/material';
+import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box } from '@mui/material';
 import { useState } from 'react';
 
 import './AddRecipe.css';
+import InsertItem from './InsertItem';
 
 function AddRecipe() {
 
@@ -55,6 +56,12 @@ function AddRecipe() {
                         <MenuItem value="Main">Hard</MenuItem>
                     </Select>
                 </FormControl>
+            </Container>
+
+            <Container className="selectContainer">
+                <InsertItem/>
+                {/* <Button>Add Item</Button> */}
+
             </Container>
 
 
