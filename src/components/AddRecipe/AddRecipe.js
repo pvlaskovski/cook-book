@@ -2,6 +2,8 @@
 import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box } from '@mui/material';
 import { useState } from 'react';
 
+import firebaseService from '../../services/firebase';
+
 import './AddRecipe.css';
 import InsertItem from './InsertItem';
 import InsertStep from './InsertMethod';
@@ -18,6 +20,16 @@ function AddRecipe() {
     const handleDifficultyChange = (e) => {
         setDifficulty(e.target.value)
     };
+
+    const submitRecipe = function(){
+        console.log("click submit");
+        firebaseService.addRecipe();
+    }
+
+    const getAllRecipes = function(){
+        console.log("click get");
+        firebaseService.getAllRecipes();
+    }
 
     return (
 
@@ -71,10 +83,7 @@ function AddRecipe() {
                 <TextField id="outlined-basic" label="Image Url" variant="outlined" fullWidth />
             </Container>
 
-            <Button variant="contained">Submit</Button>
-
-
-
+            <Button variant="contained" onClick={submitRecipe}>Submit</Button>
 
         </Container>
 

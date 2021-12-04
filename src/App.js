@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="App">
         <Header/>
-        {/* <Register/>
-        <Login/>
-        <SidebarFilters/>
+        {/* <Register/> */}
+        {/* <Login/> */}
+        {/* <SidebarFilters/>
         <RecepiesGrid/>
         <RecipeDetails/> */}
         <AddRecipe/>

@@ -2,8 +2,19 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from '../config/firebase';
 
+import { getFirestore } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore"; 
+
+
+//WORKING
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+//ISSUE
+const db = getFirestore(app);
+
+
+
 
 const login = function (email, password) {
     signInWithEmailAndPassword(auth, email, password)
@@ -35,9 +46,42 @@ const register = function (email, password) {
         });
 }
 
+const addRecipe = async function(){
+    const data = {
+        recipeName: 'Test Recipe',
+        recipeType: 'Dessert',
+        recipeDifficulty: 'easy',
+        items: [{item: "pepper", quantity: "5 gr"}, {item: "rice", quantity: "200 gr"}],
+        steps: ["first step", "second step", "third step"],
+        imgUrl: "https://www.freepnglogos.com/uploads/cake-png/cake-png-transparent-cake-images-pluspng-21.png",
+        rating: 0,
+        likes: 0
+      };
+
+      try {
+        const docRef = await addDoc(collection(db, "recepies"), data);
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+      // Add a new document in collection "recepies"
+        // const res = await db.collection('recepies').set(data);
+}
+
+const getAllRecipes = async function () {
+
+    const querySnapshot = await getDocs(collection(db, "recepies"));
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+}
+
 const firebaseService = {
     login,
-    register
+    register,
+    addRecipe,
+    getAllRecipes,
 }
 
 
