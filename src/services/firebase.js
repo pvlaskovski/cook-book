@@ -70,11 +70,22 @@ const addRecipe = async function(){
 
 const getAllRecipes = async function () {
 
-    const querySnapshot = await getDocs(collection(db, "recepies"));
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-    });
+    let allRecipes = [];
+    const response = await getDocs(collection(db, "recepies"));
+    
+    response.forEach(recipe => {
+        const { id } = recipe;
+        const data = recipe.data();
+        let currentRecipe = {
+            id,
+            recipe: data,
+        }
+        // console.log(data);
+        allRecipes.push(currentRecipe);
+    })
+    
+    return allRecipes;
+
 }
 
 const firebaseService = {

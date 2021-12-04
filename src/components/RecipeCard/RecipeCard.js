@@ -1,22 +1,15 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography } from '@mui/material';
 
-function RecipeCard() {
+function RecipeCard({recipe}) {
 
     return (
         <Card>
             <CardActionArea>
+                
                 <CardHeader
                     avatar={
                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -24,17 +17,19 @@ function RecipeCard() {
                         </Avatar>
                     }
 
-                    title="Shrimp and Chorizo Paella"
+                    title={(recipe.recipeName)? recipe.recipeName : 'No name'}
+                    // title="Some Title"
                     subheader="September 14, 2016"
                 />
                 <CardMedia
                     component="img"
                     height="194"
-                    image="https://ardo.com/files/attachments/.18687/w900h600zcCq85_PAELLA_ROYAL_207.jpg"
-                    alt="Paella dish"
+                    image={recipe.imgUrl}
+                    alt={recipe.recipeName}
                 />
                 <CardContent>
                     <Typography variant="body2" color="text.secondary">
+                        {/* To add short description to the add recipe input */}
                         This impressive paella is a perfect party dish and a fun meal to cook
                         together with your guests. Add 1 cup of frozen peas along with the mussels,
                         if you like.
