@@ -5,42 +5,51 @@ import ButtonHover from './ButtonHover.js';
 function InsertItem() {
 
     const [itemsList, setItemsList] = useState([{
-        item: "test",
-        quantity: "test",
+        item: "",
+        quantity: "",
     }]);
 
     const handleAddClick = function () {
         setItemsList([...itemsList, { item: "", quantity: "" }]);
     }
 
-    const handleItemsChange = function (e, index) {
-        const { key, value } = e.target;
-        const newItemsList = [...itemsList];
-        newItemsList[index][key] = value;
-        setItemsList(newItemsList)
+    const handleDeleteClick = function(index){
+        let newItemsList = itemsList.slice();
+        newItemsList.pop(index);
+        setItemsList(newItemsList);
     }
 
+    const handleItemsChange = function (e, index) {
+        const { name, value } = e.target;
+        const newItemsList = [...itemsList];
 
+        newItemsList[index][name] = value;
+        setItemsList(newItemsList);
 
+    }
 
     const renderItems = function () {
         return itemsList.map((ingredient, index) => {
+
             return(
                 <>
-                    <ButtonHover>   
+                    <ButtonHover 
+                        index={index}
+                        handleDeleteClick={handleDeleteClick}
+                    >   
                         {index}
                     </ButtonHover>
                     <TextField className=""
-                        id={ingredient.item}
-                        label="Item"
+                        label="item"
+                        name="item"
                         variant="outlined"
                         onChange={e => handleItemsChange(e, index)}
                         fullWidth
                     />
                     <TextField
                         className=""
-                        id={ingredient.quantity}
-                        label="Quantity"
+                        label="quantity"
+                        name="quantity"
                         variant="outlined"
                         onChange={e => handleItemsChange(e, index)}
                         fullWidth
