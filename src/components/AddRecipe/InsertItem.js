@@ -25,7 +25,6 @@ function InsertItem() {
 
         newItemsList[index][name] = value;
         setItemsList(newItemsList);
-
     }
 
     const renderItems = function () {

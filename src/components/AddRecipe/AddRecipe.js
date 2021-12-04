@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import './AddRecipe.css';
 import InsertItem from './InsertItem';
+import InsertStep from './InsertMethod';
 
 function AddRecipe() {
 
@@ -60,9 +61,17 @@ function AddRecipe() {
 
             <Container className="selectContainer">
                 <InsertItem/>
-                {/* <Button>Add Item</Button> */}
-
             </Container>
+
+            <Container className="methodContainer">
+                <InsertStep/>
+            </Container>
+
+            <Container className="methodContainer">
+                <TextField id="outlined-basic" label="Image Url" variant="outlined" fullWidth />
+            </Container>
+
+            <Button variant="contained">Submit</Button>
 
 
 
