@@ -23,7 +23,7 @@ function RecepiesGrid() {
                 console.log(recipeDetails);
                 return(
                     <Grid item xs={12} sm={6} md={3} key={recipeId}>
-                        <RecipeCard className="recipeContainer"  recipe={recipeDetails} />
+                        <RecipeCard className="recipeContainer"  recipeId= {recipeId} recipe={recipeDetails} />
                     </Grid>
                 )
             })
