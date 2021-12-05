@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import ButtonHover from './ButtonHover.js';
 
-function InsertStep() {
+function InsertStep(props) {
 
     const [stepsList, setStepsList] = useState(["",""]);
 
@@ -25,7 +25,7 @@ function InsertStep() {
 
         newStepsList[index] = step;
         setStepsList(newStepsList);
-
+        props.getItems(stepsList);
     }
 
     const renderSteps = function () {
@@ -39,15 +39,15 @@ function InsertStep() {
                         index={index}
                         handleDeleteClick={handleDeleteClick}
                     >   
-                        {index}
+                        {index + 1}
                     </ButtonHover>
-                    <TextField className=""
+                    <TextField className="step"
                         label="Step"
                         name="step"
                         variant="outlined"
                         defaultValue=""
                         onChange={e => handleStepsChange(e, index)}
-                        multiline rows={4}
+                        multiline rows={3}
                         fullWidth
                     />
                    

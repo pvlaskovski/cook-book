@@ -46,17 +46,18 @@ const register = function (email, password) {
         });
 }
 
-const addRecipe = async function(){
-    const data = {
-        recipeName: 'Test Recipe',
-        recipeType: 'Dessert',
-        recipeDifficulty: 'easy',
-        items: [{item: "pepper", quantity: "5 gr"}, {item: "rice", quantity: "200 gr"}],
-        steps: ["first step", "second step", "third step"],
-        imgUrl: "https://www.freepnglogos.com/uploads/cake-png/cake-png-transparent-cake-images-pluspng-21.png",
-        rating: 0,
-        likes: 0
-      };
+const addRecipe = async function(data){
+    // const data = {
+    //     recipeName: 'Test Recipe',
+    //     recipeOverview: 'Some overview'
+    //     recipeType: 'Dessert',
+    //     recipeDifficulty: 'easy',
+    //     items: [{item: "pepper", quantity: "5 gr"}, {item: "rice", quantity: "200 gr"}],
+    //     steps: ["first step", "second step", "third step"],
+    //     imgUrl: "https://www.freepnglogos.com/uploads/cake-png/cake-png-transparent-cake-images-pluspng-21.png",
+    //     rating: 0,
+    //     likes: 0
+    //   };
 
       try {
         const docRef = await addDoc(collection(db, "recepies"), data);

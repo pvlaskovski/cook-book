@@ -8,7 +8,8 @@
 }
 
 .selectContainer,
-.ingredientsContainer{
+.ingredientsContainer,
+.methodContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -31,4 +32,8 @@
 
 .addItem{
     margin: auto;
+}
+
+.step{
+    margin-bottom: 1em;
 }

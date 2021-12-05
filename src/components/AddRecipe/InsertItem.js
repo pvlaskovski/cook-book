@@ -2,8 +2,7 @@ import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import ButtonHover from './ButtonHover.js';
 
-function InsertItem() {
-
+function InsertItem(props) {
     const [itemsList, setItemsList] = useState([{
         ingredient: "",
         quantity: "",
@@ -25,11 +24,13 @@ function InsertItem() {
 
         newItemsList[index][name] = value;
         setItemsList(newItemsList);
+        props.getItems(itemsList);
     }
+
 
     const renderItems = function () {
         return itemsList.map((ingredient, index) => {
-
+            console.log(itemsList);
             return(
                 <>
                     <ButtonHover 
