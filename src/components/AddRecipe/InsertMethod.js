@@ -59,7 +59,7 @@ function InsertStep() {
     return(
         <>
             {renderSteps()}
-            <Button onClick={handleAddClick}>Add Step</Button>
+            <Button className="addItem "variant="outlined" onClick={handleAddClick}>Add Step</Button>
         </>
     )
 

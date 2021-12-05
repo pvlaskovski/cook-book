@@ -6,7 +6,7 @@ export default function ButtonHover(props){
 
     
     return(
-        <Button
+        <Button 
             onClick={()=>props.handleDeleteClick(props.index)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

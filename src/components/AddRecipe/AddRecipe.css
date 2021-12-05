@@ -4,10 +4,11 @@
 }
 
 .container > *{
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
-.selectContainer{
+.selectContainer,
+.ingredientsContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -19,4 +20,15 @@
     width: 50%;
     margin: auto;
     margin-bottom: 1em;
+}
+
+.insertIngredient{
+    min-width: 300px;
+    width: 45%;
+    margin: auto;
+    margin-bottom: 1em;
+}
+
+.addItem{
+    margin: auto;
 }

@@ -10,12 +10,12 @@ function App() {
   return (
     <div className="App">
         <Header/>
-        <RecepiesGrid/>
+        {/* <RecepiesGrid/> */}
         {/* <Register/> */}
         {/* <Login/> */}
         {/* <SidebarFilters/>
         <RecipeDetails/> */}
-        {/* <AddRecipe/> */}
+        <AddRecipe/>
     </div>
   );
 }

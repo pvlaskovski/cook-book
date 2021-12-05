@@ -5,7 +5,7 @@ import ButtonHover from './ButtonHover.js';
 function InsertItem() {
 
     const [itemsList, setItemsList] = useState([{
-        item: "",
+        ingredient: "",
         quantity: "",
     }]);
 
@@ -36,18 +36,18 @@ function InsertItem() {
                         index={index}
                         handleDeleteClick={handleDeleteClick}
                     >   
-                        {index}
+                        {index + 1}
                     </ButtonHover>
-                    <TextField className=""
-                        label="item"
-                        name="item"
+                    <TextField className="insertIngredient"
+                        label="Ingredient"
+                        name="ingredient"
                         variant="outlined"
                         onChange={e => handleItemsChange(e, index)}
                         fullWidth
                     />
                     <TextField
-                        className=""
-                        label="quantity"
+                        className="insertIngredient"
+                        label="Quantity"
                         name="quantity"
                         variant="outlined"
                         onChange={e => handleItemsChange(e, index)}
@@ -61,7 +61,7 @@ function InsertItem() {
     return(
         <>
             {renderItems()}
-            <Button onClick={handleAddClick}>Add Item</Button>
+            <Button className="addItem "variant="outlined" onClick={handleAddClick}>Add Item</Button>
         </>
     )
 

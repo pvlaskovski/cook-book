@@ -1,5 +1,5 @@
 
-import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box } from '@mui/material';
+import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import firebaseService from '../../services/firebase';
@@ -36,8 +36,12 @@ function AddRecipe() {
         // TODO: needs abstraction for the select to work with any input
 
         <Container className="container">
-            <h2>Add Recipe</h2>
+            <Typography>Add Recipe</Typography>
             <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth />
+
+            <Typography>Short Overview</Typography>
+            <TextField label="Add overview" variant="outlined" fullWidth  multiline rows={2} />
+
 
             <Container className="selectContainer">
                 <FormControl className="select" >
@@ -45,7 +49,6 @@ function AddRecipe() {
                     <Select
                         labelId="type"
                         id="type-select"
-                        value={age}
                         label="Type"
                         onChange={handleTypeChange}
                     >
@@ -71,10 +74,12 @@ function AddRecipe() {
                 </FormControl>
             </Container>
 
-            <Container className="selectContainer">
+            <Typography component="p">Add Ingredient</Typography>
+            <Container className="ingredientsContainer">
                 <InsertItem/>
             </Container>
 
+            <Typography component="p">Add Steps</Typography>
             <Container className="methodContainer">
                 <InsertStep/>
             </Container>
