@@ -9,17 +9,33 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+
+
 
 export default function SignUp() {
+    const [user, setUser] = useState();
+ 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         
         const email = data.get('email');
         const password = data.get('password')
-        
-        firebaseService.login(email, password);
        
+            
+        firebaseService.login(email, password)
+        .then(res => {
+            const user = res.user;
+            console.log(user.email);
+            toast.success("Welcome " + user.email);
+        })
+        .catch(err=>{
+            toast.error("Incorrect username or password");
+        })
+        
+            
     };
 
     return (

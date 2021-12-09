@@ -1,39 +1,42 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseConfig from '../config/firebase';
-
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore"; 
-
-import toast from 'react-hot-toast';
-
 
 
 //WORKING
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
+
 //ISSUE
 const db = getFirestore(app);
 
-
-
-
-const login = function (email, password) {
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Registered in 
-            const user = userCredential.user;
-            console.log(user);
-            toast.success("Welcome " + user.email);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-            toast.error("Incorrect username or password")
-        });
+const login = async function (email, password) {
+    try {
+        let res = signInWithEmailAndPassword(auth, email, password);
+        return res;
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        throw errorMessage;
+    }
+    // signInWithEmailAndPassword(auth, email, password)
+    //     .then((userCredential) => {
+    //         // Registered in 
+    //         const user = userCredential.user;
+    //         console.log(user);
+    //         toast.success("Welcome " + user.email);
+    //     })
+    //     .catch((error) => {
+    //         const errorCode = error.code;
+    //         const errorMessage = error.message;
+    //         console.log(errorCode);
+    //         console.log(errorMessage);
+    //         toast.error("Incorrect username or password");
+    //     });
 }
 
 const register = function (email, password) {
@@ -95,6 +98,7 @@ const getAllRecipes = async function () {
 }
 
 const firebaseService = {
+    auth,
     login,
     register,
     addRecipe,
