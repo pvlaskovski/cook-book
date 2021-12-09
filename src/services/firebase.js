@@ -5,6 +5,9 @@ import firebaseConfig from '../config/firebase';
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore"; 
 
+import toast from 'react-hot-toast';
+
+
 
 //WORKING
 const app = initializeApp(firebaseConfig);
@@ -22,12 +25,14 @@ const login = function (email, password) {
             // Registered in 
             const user = userCredential.user;
             console.log(user);
+            toast.success("Welcome " + user.email);
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage);
+            toast.error("Incorrect username or password")
         });
 }
 

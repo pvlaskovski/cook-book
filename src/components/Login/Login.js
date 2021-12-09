@@ -17,8 +17,9 @@ export default function SignUp() {
         
         const email = data.get('email');
         const password = data.get('password')
-
+        
         firebaseService.login(email, password);
+       
     };
 
     return (
