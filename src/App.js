@@ -8,29 +8,42 @@ import AddRecipe from './components/AddRecipe/AddRecipe';
 import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
+import { AuthContext } from './contexts/AuthContext';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
-  return (
-    <div className="App">
-        <div>
-            <Toaster/>
-        </div>
-        
-        <Header/>
+    const [user, setUser] = useLocalStorage('user',{ 
+        email: "", 
+        uid: "" 
+    });
 
-        <Routes>
-            <Route path="/" element={<RecepiesGrid/>} />
-            <Route path="/recipes" element={<RecepiesGrid/>} />
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/register" element={<Register/>} />
-            <Route path="/addRecipe" element={<AddRecipe/>} />
-            <Route path="/details/" element={<RecipeDetails/>} />
-        </Routes>
+    function login (authData){
+        setUser(authData);
+    }
 
-        <Footer/>
-        {/* <SidebarFilters/> */}
-    </div>
-  );
+    return (
+        <AuthContext.Provider value={{user, login}}>
+            <div className="App">
+                <div>
+                    <Toaster />
+                </div>
+
+                <Header />
+
+                <Routes>
+                    <Route path="/" element={<RecepiesGrid />} />
+                    <Route path="/recipes" element={<RecepiesGrid />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/addRecipe" element={<AddRecipe />} />
+                    <Route path="/details/" element={<RecipeDetails />} />
+                </Routes>
+
+                <Footer />
+                {/* <SidebarFilters/> */}
+            </div>
+        </AuthContext.Provider>
+    );
 }
 
 export default App;

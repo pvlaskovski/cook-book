@@ -9,13 +9,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 export default function SignUp() {
-    const [user, setUser] = useState();
+
+    let navigate = useNavigate();
+
+    const {login} = useContext(AuthContext);
  
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,18 +29,18 @@ export default function SignUp() {
         const email = data.get('email');
         const password = data.get('password')
        
-            
         firebaseService.login(email, password)
         .then(res => {
             const user = res.user;
-            console.log(user.email);
-            toast.success("Welcome " + user.email);
+            let email = user.email;
+            let uid = user.uid;
+            login({ email, uid });
+            toast.success("Welcome " + email);
+            navigate('/');
         })
         .catch(err=>{
             toast.error("Incorrect username or password");
-        })
-        
-            
+        })  
     };
 
     return (
