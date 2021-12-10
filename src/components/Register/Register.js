@@ -17,11 +17,12 @@ import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import { Link as RouterLink } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 
 
 
-export default function Register() {
+export default function Register(props) {
 
     const [pwStrenght, setPwStrenght] = useState({
         class: null,
@@ -63,22 +64,37 @@ export default function Register() {
         }
     }
 
+    let navigate = useNavigate()
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         
         const email = data.get('email');
-        const password = data.get('password')
-        
+        const password = data.get('password');
+        const acceptedTerms = Boolean(data.get('checkboxTerms'));
       
-        firebaseService.register(email, password)
-            .then(res =>{
-                console.log(res);
-                toast.success(`${email} registered succesfully!`)
-            })
-            .catch(error=>{
-                toast.error(error.message);
-            })
+        if(acceptedTerms){
+            firebaseService.register(email, password)
+                .then(res =>{
+                    let user = res.user;
+                    let newUserEmail = user.email;
+                    let newUserUid = user.uid;
+
+                    toast.success(`${email} registered succesfully!`);
+                    
+                    props.login({
+                        email: newUserEmail,
+                        uid: newUserUid,
+                    });
+                    navigate('/');       
+                })
+                .catch(error=>{
+                    toast.error(error.message);
+                })
+        }else{
+            toast.error("Please accept terms and conditions to register!")
+        }
        
 
     };
@@ -117,7 +133,7 @@ export default function Register() {
 
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Checkbox value="agreement" color="primary" />}
+                                control={<Checkbox value="agreement" color="primary" required name="checkboxTerms"/>}
                                 label="I agree with the tearms and conditions"
                             />
                         </Grid>

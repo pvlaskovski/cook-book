@@ -42,7 +42,7 @@ function App() {
                     <Route path="/recipes" element={<RecepiesGrid />} />
                     <Route path="/login" element={<Login login={login} />} />
                     <Route path="/logout" element={<Logout logout={logout} />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route path="/register" element={<Register login={login} />} />
                     <Route path="/addRecipe" element={<AddRecipe />} />
                     <Route path="/details/" element={<RecipeDetails />} />
                 </Routes>
