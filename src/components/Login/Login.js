@@ -9,18 +9,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import { AuthContext } from '../../contexts/AuthContext';
-
-
-export default function SignUp() {
+export default function SignUp(props) {
 
     let navigate = useNavigate();
 
-    const {login} = useContext(AuthContext);
+    const login = props.login;
  
     const handleSubmit = (event) => {
         event.preventDefault();

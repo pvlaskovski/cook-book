@@ -22,7 +22,7 @@ function App() {
     }
 
     return (
-        <AuthContext.Provider value={{user, login}}>
+        <AuthContext.Provider value={user}>
             <div className="App">
                 <div>
                     <Toaster />
@@ -33,7 +33,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<RecepiesGrid />} />
                     <Route path="/recipes" element={<RecepiesGrid />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Login login={login} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/addRecipe" element={<AddRecipe />} />
                     <Route path="/details/" element={<RecipeDetails />} />
