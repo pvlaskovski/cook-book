@@ -19,10 +19,13 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 
 
 export default function Register(props) {
+
+    const {login} = useAuthContext();
 
     const [pwStrenght, setPwStrenght] = useState({
         class: null,
@@ -83,7 +86,7 @@ export default function Register(props) {
 
                     toast.success(`${email} registered succesfully!`);
                     
-                    props.login({
+                    login({
                         email: newUserEmail,
                         uid: newUserUid,
                     });

@@ -11,12 +11,13 @@ import Container from '@mui/material/Container';
 
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 export default function SignUp(props) {
 
     let navigate = useNavigate();
 
-    const login = props.login;
+    const {login} = useAuthContext();
  
     const handleSubmit = (event) => {
         event.preventDefault();

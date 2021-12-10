@@ -10,26 +10,12 @@ import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
 import { AuthContext } from './contexts/AuthContext';
-import useLocalStorage from './hooks/useLocalStorage';
+import { AuthProvider } from './contexts/AuthContext';
 
-const initialAuthState = { 
-    email: "", 
-    uid: "" 
-}
 
 function App() {
-    const [user, setUser] = useLocalStorage('user', initialAuthState);
-
-    function login (authData){
-        setUser(authData);
-    }
-
-    function logout(){
-        setUser(initialAuthState);
-    }
-
     return (
-        <AuthContext.Provider value={user}>
+        <AuthProvider>
             <div className="App">
                 <div>
                     <Toaster />
@@ -40,9 +26,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<RecepiesGrid />} />
                     <Route path="/recipes" element={<RecepiesGrid />} />
-                    <Route path="/login" element={<Login login={login} />} />
-                    <Route path="/logout" element={<Logout logout={logout} />} />
-                    <Route path="/register" element={<Register login={login} />} />
+                    <Route path="/login" element={<Login  />} />
+                    <Route path="/logout" element={<Logout  />} />
+                    <Route path="/register" element={<Register  />} />
                     <Route path="/addRecipe" element={<AddRecipe />} />
                     <Route path="/details/" element={<RecipeDetails />} />
                 </Routes>
@@ -50,7 +36,7 @@ function App() {
                 <Footer />
                 {/* <SidebarFilters/> */}
             </div>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 

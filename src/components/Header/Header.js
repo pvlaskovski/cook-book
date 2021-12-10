@@ -2,11 +2,11 @@ import { Toolbar, AppBar, Button } from '@mui/material';
 import { Link } from "react-router-dom";
 import './Header.css';
 
-import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext, useAuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
 
 function Header() {
-    const user = useContext(AuthContext);
+    const {user} = useAuthContext();
 
     function renderLoggedOutButtons() {
         return (
