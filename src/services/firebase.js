@@ -1,8 +1,9 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import firebaseConfig from '../config/firebase';
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore"; 
+import toast from 'react-hot-toast';
 
 
 //WORKING
@@ -37,6 +38,15 @@ const login = async function (email, password) {
     //         console.log(errorMessage);
     //         toast.error("Incorrect username or password");
     //     });
+}
+
+const logout = function(){
+    signOut(auth).then(() => {
+        console.log("Signed out");
+        toast.success('Logged out')
+      }).catch((error) => {
+        console.log("Some errror");
+      });
 }
 
 const register = function (email, password) {
@@ -100,6 +110,7 @@ const getAllRecipes = async function () {
 const firebaseService = {
     auth,
     login,
+    logout,
     register,
     addRecipe,
     getAllRecipes,
