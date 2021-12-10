@@ -20,6 +20,7 @@ function Header() {
     function renderLoggedInButtons() {
         return (
             <>
+                <span>Welcome {user.email}</span>   
                 <Button color="inherit" component={Link} to="/logout">Logout</Button>
                 <Button color="inherit" component={Link} to="/addRecipe">Add Recipe</Button>
             </>
@@ -32,7 +33,6 @@ function Header() {
             <AppBar className="header">
                 <Toolbar className="toolbar-logo">
                     <h1 className="logo">Put logo here</h1>
-
                 </Toolbar>
                 <Toolbar className="toolbar-nav">
                     {user.email 
