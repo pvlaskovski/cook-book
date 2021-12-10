@@ -10,8 +10,6 @@ import toast from 'react-hot-toast';
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-
-
 //ISSUE
 const db = getFirestore(app);
 
@@ -45,23 +43,33 @@ const logout = function(){
         console.log("Signed out");
         toast.success('Logged out')
       }).catch((error) => {
+        toast.error('Couldn not log out');
         console.log("Some errror");
       });
 }
 
-const register = function (email, password) {
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(user);
-        })
-        .catch((error) => {
+const register = async function (email, password) {
+    try {
+            let res = createUserWithEmailAndPassword(auth, email, password);
+            return res;
+        } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-        });
+            throw errorMessage;
+        }
+       
+    // createUserWithEmailAndPassword(auth, email, password)
+    //     .then((userCredential) => {
+    //         // Signed in 
+    //         const user = userCredential.user;
+    //         console.log(user);
+    //     })
+    //     .catch((error) => {
+    //         const errorCode = error.code;
+    //         const errorMessage = error.message;
+    //         console.log(errorCode);
+    //         console.log(errorMessage);
+    //     });
 }
 
 const addRecipe = async function(data){

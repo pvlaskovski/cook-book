@@ -16,10 +16,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
 
+import { Link as RouterLink } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
+
 
 export default function Register() {
-    // const [pwStrenght, setPwStrenght] = useState(null);
-    // const [pwStrenghtValue, setpwStrenghtValue] = useState(0);
+
     const [pwStrenght, setPwStrenght] = useState({
         class: null,
         value: 0
@@ -66,8 +69,18 @@ export default function Register() {
         
         const email = data.get('email');
         const password = data.get('password')
+        
+      
+        firebaseService.register(email, password)
+            .then(res =>{
+                console.log(res);
+                toast.success(`${email} registered succesfully!`)
+            })
+            .catch(error=>{
+                toast.error(error.message);
+            })
+       
 
-        firebaseService.register(email, password);
     };
 
     return (
@@ -77,10 +90,10 @@ export default function Register() {
 
                 <Typography component="h1" variant="h5">Register</Typography>
 
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <TextField name="firstName" id="firstName" label="First Name" />
+                            <TextField name="firstName" id="firstName" label="First Name" required/>
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -88,11 +101,11 @@ export default function Register() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField fullWidth name="email" id="email" label="Email Address" />
+                            <TextField fullWidth name="email" id="email" label="Email Address" required/>
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField fullWidth name="password" label="Password" type="password" id="password" onChange={handlePassword} />
+                            <TextField fullWidth name="password" label="Password" type="password" id="password" required onChange={handlePassword} />
                         
                             <LinearProgress variant="determinate" className={pwStrenght.class} value={pwStrenght.value}/>
 
@@ -116,8 +129,8 @@ export default function Register() {
 
                     <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Link href="/register" variant="body2">
-                                Already have an account? Register
+                            <Link variant="body2" component={RouterLink} to="/login">
+                                Already have an account? Login
                             </Link>
                         </Grid>
                     </Grid>

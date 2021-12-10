@@ -26,17 +26,17 @@ export default function SignUp(props) {
         const password = data.get('password')
        
         firebaseService.login(email, password)
-        .then(res => {
-            const user = res.user;
-            let email = user.email;
-            let uid = user.uid;
-            login({ email, uid });
-            toast.success("Welcome " + email);
-            navigate('/');
-        })
-        .catch(err=>{
-            toast.error("Incorrect username or password");
-        })  
+            .then(res => {
+                const user = res.user;
+                let email = user.email;
+                let uid = user.uid;
+                login({ email, uid });
+                toast.success("Welcome " + email);
+                navigate('/');
+            })
+            .catch(err=>{
+                toast.error("Incorrect username or password");
+            })  
     };
 
     return (
@@ -46,7 +46,7 @@ export default function SignUp(props) {
 
                 <Typography component="h1" variant="h5">Log in</Typography>
 
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         
                         <Grid item xs={12}>
