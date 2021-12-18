@@ -1,5 +1,9 @@
 import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useAuthContext } from '../../contexts/AuthContext';
+
 
 import firebaseService from '../../services/firebase';
 
@@ -10,6 +14,8 @@ import InsertStep from './InsertMethod';
 import parseIngredients from '../../helpers/parseIngredients';
 
 function AddRecipe() {
+    const {user} = useAuthContext();
+    let navigate = useNavigate();
 
     const [type, setType] = useState('');
     const [difficulty, setDifficulty] = useState('');
@@ -37,6 +43,7 @@ function AddRecipe() {
         let recipeImageUrl = formData.get('imgUrl');
         
         let recipe = {
+            userUid: user.uid,
             recipeName,
             recipeSummary,
             recipeType,
@@ -46,7 +53,13 @@ function AddRecipe() {
             recipeImageUrl,
         }
 
-        
+        console.log(recipe);
+        try {
+            firebaseService.addRecipe(recipe);
+            navigate('/');
+        } catch (error) {
+            
+        }
     }
     
    

@@ -23,15 +23,12 @@ function RecipeCard({recipeId, recipe}) {
                     <CardMedia
                         component="img"
                         height="194"
-                        image={recipe.imgUrl}
+                        image={recipe.recipeImageUrl}
                         alt={recipe.recipeName}
                     />
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
-                            {/* To add short description to the add recipe input */}
-                            This impressive paella is a perfect party dish and a fun meal to cook
-                            together with your guests. Add 1 cup of frozen peas along with the mussels,
-                            if you like.
+                            {recipe.recipeSummary}
                         </Typography>
                     </CardContent>     
             </CardActionArea>
