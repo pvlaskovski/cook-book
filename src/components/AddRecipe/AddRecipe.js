@@ -8,15 +8,16 @@ import firebaseService from '../../services/firebase';
 
 import InsertItem from './InsertItem';
 import InsertStep from './InsertMethod';
+import SelectDropdown from '../Common/SelectDropdown';
 
 import parseIngredients from '../../helpers/parseIngredients';
 
 function AddRecipe() {
-    const {user} = useAuthContext();
-    let navigate = useNavigate();
-
     const [type, setType] = useState('');
     const [difficulty, setDifficulty] = useState('');
+
+    const {user} = useAuthContext();
+    let navigate = useNavigate();
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
@@ -63,8 +64,8 @@ function AddRecipe() {
 
     return (
 
-        // TODO: needs abstraction for the select to work with any input
         <Container className="container" component="form">
+
             <Typography>Add Recipe</Typography>
             <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth name="recipeName"/>
 
@@ -73,7 +74,8 @@ function AddRecipe() {
 
 
             <Container className="selectContainer">
-                <FormControl className="select" >
+
+                {/* <FormControl className="select" >
                     <InputLabel id="type">Type</InputLabel>
                     <Select
                         labelId="type"
@@ -86,9 +88,9 @@ function AddRecipe() {
                         <MenuItem value="Deserts">Deserts</MenuItem>
                         <MenuItem value="Main">Main</MenuItem>
                     </Select>
-                </FormControl>
+                </FormControl> */}
 
-                <FormControl className="select" >
+                {/* <FormControl className="select" >
                     <InputLabel id="difficulty" >Difficulty</InputLabel>
                     <Select
                         labelId="difficulty"
@@ -101,7 +103,21 @@ function AddRecipe() {
                         <MenuItem value="Medium">Medium</MenuItem>
                         <MenuItem value="Hard">Hard</MenuItem>
                     </Select>
-                </FormControl>
+                </FormControl> */}
+
+                <SelectDropdown
+                    label="Type"
+                    handleTypeChange={handleTypeChange}
+                    dropdownItems={["Soups", "Deserts", "Main" ]}
+                />
+
+                <SelectDropdown
+                    label="Difficulty"
+                    handleTypeChange={handleDifficultyChange}
+                    dropdownItems={["Easy", "Medium", "Hard"]}
+                />
+
+               
             </Container>
 
             <Typography component="p">Add Ingredient</Typography>
