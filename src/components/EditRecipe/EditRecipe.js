@@ -1,22 +1,26 @@
 import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 
 import firebaseService from '../../services/firebase';
 
-import InsertItem from './InsertItem';
-import InsertStep from './InsertMethod';
+import '../AddRecipe/AddRecipe.css';
+import InsertItem from '../AddRecipe/InsertItem';
+import InsertStep from '../AddRecipe//InsertMethod';
 
 import parseIngredients from '../../helpers/parseIngredients';
 
-function AddRecipe() {
+function EditRecipe(props) {
+
     const {user} = useAuthContext();
+    let { recipeId } = useParams();
     let navigate = useNavigate();
 
     const [type, setType] = useState('');
     const [difficulty, setDifficulty] = useState('');
+    const [recipe, setRecipe] = useState({});
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
@@ -60,16 +64,25 @@ function AddRecipe() {
         }
     }
     
+    useEffect(() => {
+        console.log("Recipe ID is: " + recipeId);
+        firebaseService.getRecipeById(recipeId)
+            .then(res=> {
+                setRecipe(res);
+                setType(res.recipeType);
+                setDifficulty(res.recipeDifficulty);
+            })
+    }, []);
 
     return (
 
         // TODO: needs abstraction for the select to work with any input
         <Container className="container" component="form">
-            <Typography>Add Recipe</Typography>
-            <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth name="recipeName"/>
+            <Typography>Edit Recipe</Typography>
+            <TextField id="outlined-basic" variant="outlined" fullWidth name="recipeName" value={recipe ? recipe.recipeName : null}/>
 
-            <Typography>Short Overview</Typography>
-            <TextField label="Add overview" variant="outlined" fullWidth multiline rows={2} name="recipeOverview" />
+            <Typography>Overview</Typography>
+            <TextField variant="outlined" fullWidth multiline rows={2} name="recipeOverview" value={recipe ? recipe.recipeSummary : null} />
 
 
             <Container className="selectContainer">
@@ -104,18 +117,18 @@ function AddRecipe() {
                 </FormControl>
             </Container>
 
-            <Typography component="p">Add Ingredient</Typography>
+            <Typography component="p">Ingredient</Typography>
             <Container className="ingredientsContainer">
                 <InsertItem />
             </Container>
 
-            <Typography component="p">Add Steps</Typography>
+            <Typography component="p">Steps</Typography>
             <Container className="methodContainer">
                 <InsertStep/>
             </Container>
 
             <Container className="methodContainer">
-                <TextField id="outlined-basic" label="Image Url" variant="outlined" name="imgUrl" fullWidth />
+                <TextField id="outlined-basic" variant="outlined" name="imgUrl" value={recipe.recipeImageUrl} fullWidth />
             </Container>
 
             <Button variant="contained" onClick={submitRecipe}>Submit</Button>
@@ -126,4 +139,4 @@ function AddRecipe() {
     )
 }
 
-export default AddRecipe;
+export default EditRecipe;

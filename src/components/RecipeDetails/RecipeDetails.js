@@ -11,15 +11,13 @@ import './RecipeDetails.css';
 import CustomRating from "../CustomRating/CustomRating";
 import firebaseService from "../../services/firebase";
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { useEffect } from "react";
 
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
     const [recipe, setRecipe] = useState();
-
-
 
     function handleFavouriteClick (){
         setFavourite(!favourite);
@@ -65,7 +63,7 @@ function RecipeDetails() {
             <Box className="topAvatarsContainer">
                 <Box className="avatarsContainer">
                     <Avatar className="avatar">
-                        <Button className="editButton">
+                        <Button className="editButton" component={Link} to="edit">
                             <EditIcon/>
                         </Button>
                     </Avatar>

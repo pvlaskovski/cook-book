@@ -32,7 +32,7 @@ function Header() {
         <header>
             <AppBar className="header">
                 <Toolbar className="toolbar-logo">
-                    <h1 className="logo">Put logo here</h1>
+                <Link to="/"><h1 className="logo">Put logo here</h1></Link>
                 </Toolbar>
                 <Toolbar className="toolbar-nav">
                     {user.email 

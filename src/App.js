@@ -6,6 +6,7 @@ import SidebarFilters from './components/SideberFilters/SidebarFilters';
 import RecepiesGrid from './components/RecipesGrid/RecipesGrid';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import AddRecipe from './components/AddRecipe/AddRecipe';
+import EditRecipe from './components/EditRecipe/EditRecipe';
 import Footer from './components/Footer/Footer';
 import { Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
@@ -32,7 +33,8 @@ function App() {
                     <Route path="/logout" element={<Logout  />} />
                     <Route path="/register" element={<Register  />} />
                     <Route path="/addRecipe" element={<AddRecipe />} />
-                    <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
+                    <Route path="recipe/:recipeId" element={<RecipeDetails />} />
+                    <Route path="recipe/:recipeId/edit" element={<EditRecipe />} />
                 </Routes>
 
                 <Footer />
