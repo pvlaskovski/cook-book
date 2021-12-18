@@ -9,12 +9,54 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 import './RecipeDetails.css';
 import CustomRating from "../CustomRating/CustomRating";
+import firebaseService from "../../services/firebase";
+
+import { useParams } from "react-router-dom";
+
+import { useEffect } from "react";
 
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
+    const [recipe, setRecipe] = useState();
+
+
 
     function handleFavouriteClick (){
         setFavourite(!favourite);
+    }
+
+    let { recipeId } = useParams();
+    
+    useEffect(() => {
+        firebaseService.getRecipeById(recipeId)
+            .then(res=> {
+                setRecipe(res);
+                console.log('Thi is the useState');
+                console.log(recipe);
+            })
+    }, []);
+
+    function renderIngredients(){
+        return(
+            recipe.recipeIngredients.map(i=>{
+                let ingredient = i.ingredient;
+                let quantity = i.quantity;
+                return(
+                    <li>{ingredient}: {quantity}</li>
+                )
+            })
+            
+        )
+    }
+
+    function renderSteps() {
+        return (
+            recipe.recipeSteps.map(step => {
+                return (
+                    <li>{step}</li>
+                )
+            })
+        )
     }
 
     return (
@@ -40,33 +82,25 @@ function RecipeDetails() {
                 </Box>
             </Box>
 
-            <h2>Name of the recepie</h2>
+            <h2>{recipe ? recipe.recipeName : null}</h2>
             <span>Author and date and time</span>
 
             <Container className="container">
                 <Box className="containerSection">
                     <p>Ingredients</p>
                     <ul>
-                        <li>500 gr beef</li>
-                        <li>2 tablespoons Dijon mustard (optional)</li>
-                        <li>1 large egg (free-range)</li>
-                        <li>1 round lettuce</li>
-                        <li>1 beef tomato</li>
+                        {recipe ? renderIngredients() : null}
                     </ul>
                 </Box>
                 <Box className="containerSection">
                     <p>Steps</p>
                     <ol>
-                        <li>Using a bowl, mix the minced beef and mustard.</li>
-                        <li>Crack the egg into the bowl, then add a good pinch of sea salt and black pepper.</li>
-                        <li>With clean hands, scrunch and mix everything up well. Divide into 6 and pat and mould each piece into a roundish shape, roughly 2cm thick.</li>
-                        <li>Place the burgers onto a plate, drizzle with oil, then cover and place in the fridge until needed – this will help to firm them up.</li>
-                        <li>To cook the burgers, preheat a large griddle or frying pan for 4 minutes on a high heat, then turn the heat down to medium.</li>
+                        {recipe ? renderSteps() : null}
                     </ol>
                 </Box>
 
                 <Box className="imageContainer">
-                    <img className="image" src="https://www.freepnglogos.com/uploads/cake-png/cake-png-transparent-cake-images-pluspng-21.png" />
+                    <img className="image" src={recipe? recipe.recipeImageUrl : null} />
                 </Box>
 
             </Container>

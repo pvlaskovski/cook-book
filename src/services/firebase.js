@@ -101,7 +101,22 @@ const getAllRecipes = async function () {
     })
     
     return allRecipes;
+}
 
+const getRecipeById = async function (recipeId) {
+
+    const docRef = doc(db, "recepies", recipeId);
+
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+
+    return docSnap.data();
 }
 
 const firebaseService = {
@@ -111,6 +126,7 @@ const firebaseService = {
     register,
     addRecipe,
     getAllRecipes,
+    getRecipeById,
 }
 
 
