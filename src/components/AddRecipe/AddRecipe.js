@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../contexts/AuthContext';
 
-
 import firebaseService from '../../services/firebase';
 
 import './AddRecipe.css';
@@ -62,16 +61,10 @@ function AddRecipe() {
         }
     }
     
-   
-    const getAllRecipes = function(){
-        console.log("click get");
-        // firebaseService.getAllRecipes();
-    }
 
     return (
 
         // TODO: needs abstraction for the select to work with any input
-        
         <Container className="container" component="form">
             <Typography>Add Recipe</Typography>
             <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth name="recipeName"/>

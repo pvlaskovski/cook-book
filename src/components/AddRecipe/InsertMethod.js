@@ -4,7 +4,7 @@ import ButtonHover from './ButtonHover.js';
 
 function InsertStep(props) {
 
-    const [stepsList, setStepsList] = useState(["",""]);
+    const [stepsList, setStepsList] = useState(Array(3).fill(""));
 
     const handleAddClick = function () {
         let newList = stepsList.slice();
