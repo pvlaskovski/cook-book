@@ -1,0 +1,14 @@
+.homepageMainContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sidebarFilters{
+    width: 15%;
+}
+
+.recipesGrid{
+    width: 85%;
+}

@@ -1,10 +1,10 @@
 import { Grid } from '@mui/material';
 import RecipeCard from '../RecipeCard/RecipeCard';
-import './RecepiesGrid.css';
+import './RecipesGrid.css';
 import firebaseService from '../../services/firebase';
 import { useEffect, useState } from 'react';
 
-function RecepiesGrid() {
+function RecipesGrid() {
     const[recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -34,6 +34,7 @@ function RecepiesGrid() {
     return(
         // recipes.map(r => <p>{r.id}</p>)
         <Grid
+            className='recipesGrid'
             container
             justifyContent="flex-start"
             alignItems="center"
@@ -48,4 +49,4 @@ function RecepiesGrid() {
     
 }
 
-export default RecepiesGrid;
+export default RecipesGrid;
