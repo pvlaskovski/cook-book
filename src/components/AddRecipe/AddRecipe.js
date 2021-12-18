@@ -7,14 +7,12 @@ import './AddRecipe.css';
 import InsertItem from './InsertItem';
 import InsertStep from './InsertMethod';
 
+import parseIngredients from '../../helpers/parseIngredients';
+
 function AddRecipe() {
 
     const [type, setType] = useState('');
     const [difficulty, setDifficulty] = useState('');
-    const [itemsList, setItemsList] = useState([{
-        ingredient: "",
-        quantity: "",
-    }]);
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
@@ -28,20 +26,30 @@ function AddRecipe() {
 
     const submitRecipe = function(){
         console.log("click submit");
-        let formData = new FormData(document.querySelector('form'))
-        // console.log(formData.get("recipeName"));
-        // console.log(formData.get("recipeOverview"));
-        // console.log(type);
-        // console.log(difficulty);   
-        // let allIngredients = getStateArrFromChild();
-        // console.log(allIngredients);
-        let allSteps = getStateArrFromChild();
-        console.log(allSteps);
+        let formData = new FormData(document.querySelector('form'));
+
+        let recipeName = formData.get("recipeName");
+        let recipeSummary = formData.get("recipeOverview");
+        let recipeType = type;
+        let recipeDifficulty = difficulty;
+        let recipeIngredients = parseIngredients(formData.getAll('ingredient'));
+        let recipeSteps = formData.getAll('step');  
+        let recipeImageUrl = formData.get('imgUrl');
+        
+        let recipe = {
+            recipeName,
+            recipeSummary,
+            recipeType,
+            recipeDifficulty,
+            recipeIngredients,
+            recipeSteps,
+            recipeImageUrl,
+        }
+
+        
     }
     
-    function getStateArrFromChild(arr){
-        return arr;
-    }
+   
     const getAllRecipes = function(){
         console.log("click get");
         // firebaseService.getAllRecipes();
@@ -93,16 +101,16 @@ function AddRecipe() {
 
             <Typography component="p">Add Ingredient</Typography>
             <Container className="ingredientsContainer">
-                <InsertItem getItems={getStateArrFromChild} />
+                <InsertItem />
             </Container>
 
             <Typography component="p">Add Steps</Typography>
             <Container className="methodContainer">
-                <InsertStep getItems={getStateArrFromChild} />
+                <InsertStep/>
             </Container>
 
             <Container className="methodContainer">
-                <TextField id="outlined-basic" label="Image Url" variant="outlined" fullWidth />
+                <TextField id="outlined-basic" label="Image Url" variant="outlined" name="imgUrl" fullWidth />
             </Container>
 
             <Button variant="contained" onClick={submitRecipe}>Submit</Button>

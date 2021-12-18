@@ -18,16 +18,6 @@ function InsertStep(props) {
         setStepsList(newStepssList);
     }
 
-    const handleStepsChange = function (e, index) {
-        const step = e.target.value;
-        
-        const newStepsList = stepsList.slice();
-
-        newStepsList[index] = step;
-        setStepsList(newStepsList);
-        props.getItems(stepsList);
-    }
-
     const renderSteps = function () {
         console.log(stepsList);
 
@@ -46,7 +36,6 @@ function InsertStep(props) {
                         name="step"
                         variant="outlined"
                         defaultValue=""
-                        onChange={e => handleStepsChange(e, index)}
                         multiline rows={3}
                         fullWidth
                     />

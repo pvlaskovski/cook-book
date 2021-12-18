@@ -18,19 +18,9 @@ function InsertItem(props) {
         setItemsList(newItemsList);
     }
 
-    const handleItemsChange = function (e, index) {
-        const { name, value } = e.target;
-        const newItemsList = [...itemsList];
-
-        newItemsList[index][name] = value;
-        setItemsList(newItemsList);
-        props.getItems(itemsList);
-    }
-
-
     const renderItems = function () {
         return itemsList.map((ingredient, index) => {
-            console.log(itemsList);
+            // console.log(itemsList);
             return(
                 <>
                     <ButtonHover 
@@ -43,15 +33,13 @@ function InsertItem(props) {
                         label="Ingredient"
                         name="ingredient"
                         variant="outlined"
-                        onChange={e => handleItemsChange(e, index)}
                         fullWidth
                     />
                     <TextField
                         className="insertIngredient"
                         label="Quantity"
-                        name="quantity"
+                        name="ingredient"
                         variant="outlined"
-                        onChange={e => handleItemsChange(e, index)}
                         fullWidth
                     />
                 </>

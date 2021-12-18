@@ -27,6 +27,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Homepage />} />
                     <Route path="/recipes" element={<RecepiesGrid />} />
+                    {/* URI Login shoudlnt be available for logged in customers!!! */}
                     <Route path="/login" element={<Login  />} />
                     <Route path="/logout" element={<Logout  />} />
                     <Route path="/register" element={<Register  />} />
