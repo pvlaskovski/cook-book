@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import ButtonHover from './ButtonHover.js';
+import ButtonHover from '../Common/ButtonHover.js';
 
 function InsertStep(props) {
 
@@ -19,7 +19,6 @@ function InsertStep(props) {
     }
 
     const renderSteps = function () {
-        console.log(stepsList);
 
         return stepsList.map((step, index) => {
 

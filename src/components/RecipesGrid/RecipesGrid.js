@@ -10,7 +10,6 @@ function RecipesGrid() {
     useEffect(() => {
         firebaseService.getAllRecipes()
             .then(res=> {
-                // console.log(res);
                 setRecipes(res);
             })  
     }, []);
@@ -20,7 +19,6 @@ function RecipesGrid() {
             recipes.map(recipe=>{
                 let recipeId = recipe.id;
                 let recipeDetails = recipe.recipe;
-                console.log(recipeDetails);
                 return(
                     <Grid item xs={12} sm={6} md={3} key={recipeId}>
                         <RecipeCard className="recipeContainer"  recipeId= {recipeId} recipe={recipeDetails} />

@@ -27,7 +27,6 @@ function Header() {
         )
     }
 
-    // console.log(user.email);
     return (
         <header>
             <AppBar className="header">

@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import ButtonHover from './ButtonHover.js';
+import ButtonHover from '../Common/ButtonHover.js';
+import InputIngredient from "../Common/InputIngredient.js";
 
 function InsertItem(props) {
-    // const [itemsList, setItemsList] = useState([{
-    //     ingredient: "",
-    //     quantity: "",
-    // }]);
 
     const [itemsList, setItemsList] = useState(Array(3).fill(
         {
@@ -19,7 +16,7 @@ const handleAddClick = function () {
     setItemsList([...itemsList, { item: "", quantity: "" }]);
 }
 
-const handleDeleteClick = function (index) {
+const handleDeleteClick = function(index) {
     let newItemsList = itemsList.slice();
     newItemsList.pop(index);
     setItemsList(newItemsList);
@@ -27,8 +24,8 @@ const handleDeleteClick = function (index) {
 
 const renderItems = function () {
     return itemsList.map((ingredient, index) => {
-        // console.log(itemsList);
         return (
+
             <>
                 <ButtonHover
                     index={index}
@@ -50,6 +47,7 @@ const renderItems = function () {
                     fullWidth
                 />
             </>
+
         )
     })
 }

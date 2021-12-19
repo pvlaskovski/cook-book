@@ -24,16 +24,13 @@ function EditRecipe(props) {
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
-        // console.log(e.target.value);
     };
 
     const handleDifficultyChange = (e) => {
         setDifficulty(e.target.value);
-        console.log(e.target.value);
     };
 
     const submitRecipe = function(){
-        console.log("click submit");
         let formData = new FormData(document.querySelector('form'));
 
         let recipeName = formData.get("recipeName");
@@ -55,7 +52,6 @@ function EditRecipe(props) {
             recipeImageUrl,
         }
 
-        console.log(recipe);
         try {
             firebaseService.addRecipe(recipe);
             navigate('/');
@@ -65,7 +61,6 @@ function EditRecipe(props) {
     }
     
     useEffect(() => {
-        console.log("Recipe ID is: " + recipeId);
         firebaseService.getRecipeById(recipeId)
             .then(res=> {
                 setRecipe(res);

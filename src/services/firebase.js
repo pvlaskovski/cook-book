@@ -26,7 +26,6 @@ const login = async function (email, password) {
     //     .then((userCredential) => {
     //         // Registered in 
     //         const user = userCredential.user;
-    //         console.log(user);
     //         toast.success("Welcome " + user.email);
     //     })
     //     .catch((error) => {
@@ -96,7 +95,6 @@ const getAllRecipes = async function () {
             id,
             recipe: data,
         }
-        // console.log(data);
         allRecipes.push(currentRecipe);
     })
     

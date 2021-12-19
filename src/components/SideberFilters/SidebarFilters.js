@@ -5,7 +5,7 @@ import './SidebarFilters.css';
 
 function SidebarFilters() {
     return (
-        <Box class="sidebarFilters">
+        <Box className="sidebarFilters">
             <FormLabel component ="h2">Recepie types</FormLabel>
             <FormGroup>
                 <FormControlLabel control={<Checkbox />} label="Filter 1" />

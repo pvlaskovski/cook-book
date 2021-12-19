@@ -21,16 +21,13 @@ function AddRecipe() {
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
-        // console.log(e.target.value);
     };
 
     const handleDifficultyChange = (e) => {
         setDifficulty(e.target.value);
-        console.log(e.target.value);
     };
 
     const submitRecipe = function(){
-        console.log("click submit");
         let formData = new FormData(document.querySelector('form'));
 
         let recipeName = formData.get("recipeName");
@@ -52,7 +49,6 @@ function AddRecipe() {
             recipeImageUrl,
         }
 
-        console.log(recipe);
         try {
             firebaseService.addRecipe(recipe);
             navigate('/');
@@ -75,7 +71,7 @@ function AddRecipe() {
 
             <Container className="selectContainer">
 
-                {/* <FormControl className="select" >
+                <FormControl className="select" >
                     <InputLabel id="type">Type</InputLabel>
                     <Select
                         labelId="type"
@@ -88,9 +84,9 @@ function AddRecipe() {
                         <MenuItem value="Deserts">Deserts</MenuItem>
                         <MenuItem value="Main">Main</MenuItem>
                     </Select>
-                </FormControl> */}
+                </FormControl>
 
-                {/* <FormControl className="select" >
+                <FormControl className="select" >
                     <InputLabel id="difficulty" >Difficulty</InputLabel>
                     <Select
                         labelId="difficulty"
@@ -103,19 +99,20 @@ function AddRecipe() {
                         <MenuItem value="Medium">Medium</MenuItem>
                         <MenuItem value="Hard">Hard</MenuItem>
                     </Select>
-                </FormControl> */}
+                </FormControl>
 
-                <SelectDropdown
+                {/* <SelectDropdown
                     label="Type"
-                    handleTypeChange={handleTypeChange}
+                    handleChange={handleTypeChange}
                     dropdownItems={["Soups", "Deserts", "Main" ]}
-                />
+                    
+                /> */}
 
-                <SelectDropdown
+                {/* <SelectDropdown
                     label="Difficulty"
-                    handleTypeChange={handleDifficultyChange}
+                    handleChange={handleDifficultyChange}
                     dropdownItems={["Easy", "Medium", "Hard"]}
-                />
+                /> */}
 
                
             </Container>

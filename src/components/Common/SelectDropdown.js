@@ -2,8 +2,9 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material"
 
 export default function SelectDropdown({
     label,
-    handleTypeChange,
+    handleChange,
     dropdownItems,
+    
 }) {
     return (
 
@@ -11,12 +12,13 @@ export default function SelectDropdown({
             <InputLabel id="type">{label}</InputLabel>
             <Select
                 label={label}
-                value={label}
-                onChange={handleTypeChange}
+                // value={type}
+                onChange={handleChange}
+               
             >
                 {
                     dropdownItems.map((item) => (
-                        <MenuItem value="Soups" key={item}>{item}</MenuItem>
+                        <MenuItem key={item}>{item}</MenuItem>
                     ))
                 }
             </Select>

@@ -29,8 +29,7 @@ function RecipeDetails() {
         firebaseService.getRecipeById(recipeId)
             .then(res=> {
                 setRecipe(res);
-                console.log('Thi is the useState');
-                console.log(recipe);
+                
             })
     }, []);
 
@@ -40,7 +39,7 @@ function RecipeDetails() {
                 let ingredient = i.ingredient;
                 let quantity = i.quantity;
                 return(
-                    <li>{ingredient}: {quantity}</li>
+                    <li key={ingredient + Date.now()}>{ingredient}: {quantity}</li>
                 )
             })
             
@@ -51,7 +50,7 @@ function RecipeDetails() {
         return (
             recipe.recipeSteps.map(step => {
                 return (
-                    <li>{step}</li>
+                    <li key={step + Date.now()}>{step}</li>
                 )
             })
         )

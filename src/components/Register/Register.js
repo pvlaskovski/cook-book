@@ -34,7 +34,6 @@ export default function Register(props) {
 
     const handlePassword = (event) =>{
         let pw = event.currentTarget.value;
-        console.log(pw); 
 
         //one Capital, One special, One number, One lower
         const strongPasRegex = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/gm;
