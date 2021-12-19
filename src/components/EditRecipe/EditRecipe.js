@@ -8,7 +8,7 @@ import firebaseService from '../../services/firebase';
 
 import '../AddRecipe/AddRecipe.css';
 import InsertItem from '../AddRecipe/InsertItem';
-import InsertStep from '../AddRecipe//InsertMethod';
+import InsertStep from '../AddRecipe/InsertStep';
 
 import parseIngredients from '../../helpers/parseIngredients';
 

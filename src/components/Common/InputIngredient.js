@@ -1,4 +1,4 @@
-import ButtonHover from "./ButtonHover";
+import ButtonHover from "../AddRecipe/ButtonHover";
 import { TextField, Button } from "@mui/material";
 
 export default function InputIngredient(

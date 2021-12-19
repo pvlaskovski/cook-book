@@ -7,8 +7,8 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import firebaseService from '../../services/firebase';
 
 import InsertItem from './InsertItem';
-import InsertStep from './InsertMethod';
-import SelectDropdown from '../Common/SelectDropdown';
+import InsertStep from './InsertStep';
+import RecipeSteps from './RecipeSteps';
 
 import parseIngredients from '../../helpers/parseIngredients';
 

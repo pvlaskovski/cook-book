@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { TextField, Button } from "@mui/material";
-import ButtonHover from '../Common/ButtonHover.js';
+import { TextField, Button, Container } from "@mui/material";
+import ButtonHover from './ButtonHover.js';
+
+import uniqid from 'uniqid';
 
 function InsertStep(props) {
 
-    const [stepsList, setStepsList] = useState(Array(3).fill(""));
+    const [stepsList, setStepsList] = useState(Array(3).fill(null));
 
     const handleAddClick = function () {
         let newList = stepsList.slice();
@@ -12,37 +14,50 @@ function InsertStep(props) {
         setStepsList(newList);
     }
 
-    const handleDeleteClick = function(index){
-        let newStepssList = stepsList.slice();
-        newStepssList.pop(index);
-        setStepsList(newStepssList);
+    const handleStepsChange = function (e, index) {
+        let newValue = e.target.value;
+        let newStepsList = stepsList.slice();
+        newStepsList[index] = newValue;
+        setStepsList(newStepsList);
     }
 
+    const handleDeleteClick = function(index){
+        if(stepsList.length>1){
+            const list = [...stepsList];
+            list.splice(index, 1);
+            setStepsList(list);
+        }
+    }
+
+
     const renderSteps = function () {
-
+        console.log(stepsList);
         return stepsList.map((step, index) => {
-
+        
             return(
-                <>
+                <Container key={index.toString()}>
                     <ButtonHover 
                         index={index}
                         handleDeleteClick={handleDeleteClick}
                     >   
                         {index + 1}
                     </ButtonHover>
-                    <TextField className="step"
+
+                    <TextField 
+                        value={step}
+                        onChange={e => handleStepsChange(e, index)}
+                        className="step"
                         label="Step"
                         name="step"
                         variant="outlined"
-                        defaultValue=""
                         multiline rows={3}
                         fullWidth
                     />
-                   
-                </>
+                </Container>
             )
         })
     }
+
 
     return(
         <>
@@ -50,8 +65,6 @@ function InsertStep(props) {
             <Button className="addItem "variant="outlined" onClick={handleAddClick}>Add Step</Button>
         </>
     )
-
-
 }
 
 export default InsertStep;

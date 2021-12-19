@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import ButtonHover from '../Common/ButtonHover.js';
-import InputIngredient from "../Common/InputIngredient.js";
+import ButtonHover from './ButtonHover.js';
 
 function InsertItem(props) {
 
@@ -16,9 +15,23 @@ const handleAddClick = function () {
     setItemsList([...itemsList, { item: "", quantity: "" }]);
 }
 
+const handleItemsChange = function (e, index) {
+    console.log(e.target.key);
+    const { key, value } = e.target;
+    const newItemsList = [...itemsList];
+    newItemsList[index][key] = value;
+    setItemsList(newItemsList);
+    console.log(newItemsList);
+}
+
 const handleDeleteClick = function(index) {
+    // console.log("This is the index we are deleting -> "  +index);
+
     let newItemsList = itemsList.slice();
     newItemsList.pop(index);
+
+    // console.log('Old items list -> ' + newItemsList);
+
     setItemsList(newItemsList);
 }
 
@@ -33,16 +46,21 @@ const renderItems = function () {
                 >
                     {index + 1}
                 </ButtonHover>
-                <TextField className="insertIngredient"
+                <TextField 
+                    onChange={e => handleItemsChange(e, index)}
+                    id={ingredient.ingredient}
+                    className="insertIngredient"
                     label="Ingredient"
                     name="ingredient"
                     variant="outlined"
                     fullWidth
                 />
                 <TextField
+                    onChange={e => handleItemsChange(e, index)}
+                    id={ingredient.quantity}
                     className="insertIngredient"
                     label="Quantity"
-                    name="ingredient"
+                    name="quantity"
                     variant="outlined"
                     fullWidth
                 />

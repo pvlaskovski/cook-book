@@ -1,16 +1,19 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 
-export default function ButtonHover(props){
+export default function ButtonHover({
+    index,
+    handleDeleteClick
+}){
     const [isHovered, setIsHovered] = useState(false);
 
     return(
         <Button 
-            onClick={props.handleDeleteClick(props.index)}
+            onClick={()=>handleDeleteClick(index)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            { isHovered? 'X' : props.children}
+            { isHovered? 'X' : index + 1}
         </Button>
     )
 }
