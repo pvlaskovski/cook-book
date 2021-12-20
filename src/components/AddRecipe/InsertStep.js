@@ -2,8 +2,6 @@ import { useState } from "react";
 import { TextField, Button, Container } from "@mui/material";
 import ButtonHover from './ButtonHover.js';
 
-import uniqid from 'uniqid';
-
 function InsertStep(props) {
 
     const [stepsList, setStepsList] = useState(Array(3).fill(null));
@@ -28,7 +26,6 @@ function InsertStep(props) {
             setStepsList(list);
         }
     }
-
 
     const renderSteps = function () {
         console.log(stepsList);
@@ -57,7 +54,6 @@ function InsertStep(props) {
             )
         })
     }
-
 
     return(
         <>

@@ -6,9 +6,8 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 import firebaseService from '../../services/firebase';
 
-import InsertItem from './InsertItem';
+import InsertIngredients from './InsertIngredients';
 import InsertStep from './InsertStep';
-import RecipeSteps from './RecipeSteps';
 
 import parseIngredients from '../../helpers/parseIngredients';
 
@@ -16,7 +15,7 @@ function AddRecipe() {
     const [type, setType] = useState('');
     const [difficulty, setDifficulty] = useState('');
 
-    const {user} = useAuthContext();
+    const { user } = useAuthContext();
     let navigate = useNavigate();
 
     const handleTypeChange = (e) => {
@@ -27,7 +26,7 @@ function AddRecipe() {
         setDifficulty(e.target.value);
     };
 
-    const submitRecipe = function(){
+    const submitRecipe = function () {
         let formData = new FormData(document.querySelector('form'));
 
         let recipeName = formData.get("recipeName");
@@ -35,9 +34,9 @@ function AddRecipe() {
         let recipeType = type;
         let recipeDifficulty = difficulty;
         let recipeIngredients = parseIngredients(formData.getAll('ingredient'));
-        let recipeSteps = formData.getAll('step');  
+        let recipeSteps = formData.getAll('step');
         let recipeImageUrl = formData.get('imgUrl');
-        
+
         let recipe = {
             userUid: user.uid,
             recipeName,
@@ -53,17 +52,17 @@ function AddRecipe() {
             firebaseService.addRecipe(recipe);
             navigate('/');
         } catch (error) {
-            
+
         }
     }
-    
+
 
     return (
 
         <Container className="container" component="form">
 
             <Typography>Add Recipe</Typography>
-            <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth name="recipeName"/>
+            <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth name="recipeName" />
 
             <Typography>Short Overview</Typography>
             <TextField label="Add overview" variant="outlined" fullWidth multiline rows={2} name="recipeOverview" />
@@ -114,17 +113,17 @@ function AddRecipe() {
                     dropdownItems={["Easy", "Medium", "Hard"]}
                 /> */}
 
-               
+
             </Container>
 
             <Typography component="p">Add Ingredient</Typography>
             <Container className="ingredientsContainer">
-                <InsertItem />
+                <InsertIngredients />
             </Container>
 
             <Typography component="p">Add Steps</Typography>
             <Container className="methodContainer">
-                <InsertStep/>
+                <InsertStep />
             </Container>
 
             <Container className="methodContainer">
@@ -134,7 +133,7 @@ function AddRecipe() {
             <Button variant="contained" onClick={submitRecipe}>Submit</Button>
 
         </Container>
-        
+
 
     )
 }
