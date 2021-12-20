@@ -1,9 +1,9 @@
-function parseIngredients(arr){
+function parseIngredients(ingredients, quantities){
     let finalIngredientsArray = [];
 
-        for (let index = 0; index < arr.length - 1; index+=2) {
-            let ingredient = arr[index];
-            let quantity = arr[index+1];
+        for (let index = 0; index < ingredients.length; index++) {
+            let ingredient = ingredients[index];
+            let quantity = quantities[index];
             let obj = {
                 ingredient,
                 quantity

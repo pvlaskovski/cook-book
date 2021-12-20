@@ -33,7 +33,11 @@ function AddRecipe() {
         let recipeSummary = formData.get("recipeOverview");
         let recipeType = type;
         let recipeDifficulty = difficulty;
-        let recipeIngredients = parseIngredients(formData.getAll('ingredient'));
+        
+        let recipeIngredientsNames = formData.getAll('ingredient');
+        let recipeIngredientsQuantities = formData.getAll('quantity');
+        let recipeIngredients = parseIngredients(recipeIngredientsNames, recipeIngredientsQuantities);
+        
         let recipeSteps = formData.getAll('step');
         let recipeImageUrl = formData.get('imgUrl');
 
