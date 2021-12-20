@@ -5,7 +5,7 @@ import InputIngredient from "./InputIngredient.js";
 
 function InsertIngredients(props) {
 
-    const [itemsList, setItemsList] = useState(
+    const [itemsList, setItemsList] = useState( props.ingredients ||
         [
             {
                 ingredient: "",
@@ -43,7 +43,6 @@ function InsertIngredients(props) {
 
     return(
         <Container>
-
             {itemsList.map((x,i)=>{
                 return(
                     <InputIngredient
@@ -54,49 +53,9 @@ function InsertIngredients(props) {
                     />
                 )
             })}
-
             <Button className="addItem " variant="outlined" onClick={handleAddClick}>Add Item</Button>
         </Container>
     )
-
-    // return (
-    //     <Container>
-    //         {itemsList.map((x,i)=>{
-    //             return(
-                    // <Container>
-                    //     <ButtonHover 
-                    //         index={i}
-                    //         handleDeleteClick={handleDeleteClick}
-                    //     />
-
-                    //     <TextField
-                    //         name="ingredient"
-                    //         value={x.ingredient}
-                    //         label="Ingredient"
-                    //         onChange={e => handleItemsChange(e, i)}
-                    //         className="insertIngredient"
-                    //         variant="outlined"
-                    //         fullWidth
-                    //     />
-
-                    //     <TextField
-                    //         name="quantity"
-                    //         value={x.quantity}
-                    //         label="Quantity"
-                    //         onChange={e => handleItemsChange(e, i)}
-                    //         className="insertIngredient"
-                    //         variant="outlined"
-                    //         fullWidth
-                    //     />
-                    // </Container>
-                    
-    //             )
-    //         })}
-
-    //         <Button className="addItem " variant="outlined" onClick={handleAddClick}>Add Item</Button>
-    //     </Container>
-    // )
-
 
 }
 

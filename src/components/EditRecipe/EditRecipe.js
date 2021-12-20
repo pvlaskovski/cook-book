@@ -66,6 +66,8 @@ function EditRecipe(props) {
                 setRecipe(res);
                 setType(res.recipeType);
                 setDifficulty(res.recipeDifficulty);
+                console.log("Recipe is loaded:");
+                console.log(res);
             })
     }, []);
 
@@ -113,17 +115,28 @@ function EditRecipe(props) {
             </Container>
 
             <Typography component="p">Ingredient</Typography>
-            <Container className="ingredientsContainer">
-                <InsertIngredients />
-            </Container>
+            {recipe.recipeIngredients
+                ?
+                    <Container className="ingredientsContainer">
+                        <InsertIngredients ingredients={recipe.recipeIngredients}/>
+                    </Container>
+                : 
+                    null
+            }
+            
 
-            <Typography component="p">Steps</Typography>
-            <Container className="methodContainer">
-                <InsertStep/>
-            </Container>
+            <Typography component="p">Steps</Typography>    
+            {recipe.recipeSteps 
+                ? 
+                    <Container className="methodContainer">
+                        <InsertStep steps={recipe.recipeSteps} />
+                    </Container> 
+                :
+                    null
+            }
 
             <Container className="methodContainer">
-                <TextField id="outlined-basic" variant="outlined" name="imgUrl" value={recipe.recipeImageUrl} fullWidth />
+                <TextField id="outlined-basic" variant="outlined" name="imgUrl" value={recipe ? recipe.recipeImageUrl : null} fullWidth />
             </Container>
 
             <Button variant="contained" onClick={submitRecipe}>Submit</Button>
