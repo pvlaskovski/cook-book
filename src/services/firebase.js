@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import firebaseConfig from '../config/firebase';
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, doc, getDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore"; 
 import toast from 'react-hot-toast';
 
 
@@ -80,7 +80,15 @@ const addRecipe = async function(data){
         console.error("Error adding document: ", e);
       }
       // Add a new document in collection "recepies"
-    // const res = await db.collection('recepies').set(data);
+}
+
+const updateRecipe = async function (recipeId, data) {
+    try {
+        await setDoc(doc(db, "recepies", recipeId), data);
+        console.log(`Document with ID  succesfully updated to: ${data}`);
+    } catch (e) {
+        console.error("Error editing document: ", e);
+    }
 }
 
 const getAllRecipes = async function () {
@@ -117,6 +125,8 @@ const getRecipeById = async function (recipeId) {
     return docSnap.data();
 }
 
+
+
 const firebaseService = {
     auth,
     login,
@@ -125,6 +135,7 @@ const firebaseService = {
     addRecipe,
     getAllRecipes,
     getRecipeById,
+    updateRecipe,
 }
 
 

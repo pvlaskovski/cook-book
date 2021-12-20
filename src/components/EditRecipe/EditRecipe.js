@@ -37,7 +37,11 @@ function EditRecipe(props) {
         let recipeSummary = formData.get("recipeOverview");
         let recipeType = type;
         let recipeDifficulty = difficulty;
-        let recipeIngredients = parseIngredients(formData.getAll('ingredient'));
+
+        let recipeIngredientsNames = formData.getAll('ingredient');
+        let recipeIngredientsQuantities = formData.getAll('quantity');
+        let recipeIngredients = parseIngredients(recipeIngredientsNames, recipeIngredientsQuantities);
+
         let recipeSteps = formData.getAll('step');  
         let recipeImageUrl = formData.get('imgUrl');
         
@@ -53,7 +57,7 @@ function EditRecipe(props) {
         }
 
         try {
-            firebaseService.addRecipe(recipe);
+            firebaseService.updateRecipe(recipeId, recipe);
             navigate('/');
         } catch (error) {
             
@@ -73,7 +77,6 @@ function EditRecipe(props) {
 
     return (
 
-        // TODO: needs abstraction for the select to work with any input
         <Container className="container" component="form">
             <Typography>Edit Recipe</Typography>
             <TextField id="outlined-basic" variant="outlined" fullWidth name="recipeName" value={recipe ? recipe.recipeName : null}/>
@@ -139,7 +142,7 @@ function EditRecipe(props) {
                 <TextField id="outlined-basic" variant="outlined" name="imgUrl" value={recipe ? recipe.recipeImageUrl : null} fullWidth />
             </Container>
 
-            <Button variant="contained" onClick={submitRecipe}>Submit</Button>
+            <Button variant="contained" onClick={submitRecipe}>Submit Edit</Button>
 
         </Container>
         
