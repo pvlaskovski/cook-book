@@ -8,12 +8,16 @@ function SidebarFilters() {
         <Box className="sidebarFilters">
             <FormLabel component ="h2">Recepie types</FormLabel>
             <FormGroup>
-                <FormControlLabel control={<Checkbox />} label="Filter 1" />
-                <FormControlLabel control={<Checkbox />} label="Filter 2" />
-                <FormControlLabel control={<Checkbox />} label="Filter 3" />
-                <FormControlLabel control={<Checkbox />} label="Filter 4" />
-                <FormControlLabel control={<Checkbox />} label="Filter 4" />
-                <FormControlLabel control={<Checkbox />} label="Filter 4" />
+                <FormControlLabel control={<Checkbox />} label="Soups" />
+                <FormControlLabel control={<Checkbox />} label="Deserts" />
+                <FormControlLabel control={<Checkbox />} label="Main" />
+            </FormGroup>
+
+            <FormLabel component ="h2">Recepie difficulty</FormLabel>
+            <FormGroup>
+                <FormControlLabel control={<Checkbox />} label="Easy" />
+                <FormControlLabel control={<Checkbox />} label="Medium" />
+                <FormControlLabel control={<Checkbox />} label="Hard" />
             </FormGroup>
         </Box>
     )
