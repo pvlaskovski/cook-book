@@ -4,33 +4,36 @@ import './RecipesGrid.css';
 import firebaseService from '../../services/firebase';
 import { useEffect, useState } from 'react';
 
-function RecipesGrid() {
-    const[recipes, setRecipes] = useState([]);
+function RecipesGrid(
+    { recipes, searchWord }
+) {
 
-    useEffect(() => {
-        firebaseService.getAllRecipes()
-            .then(res=> {
-                setRecipes(res);
-            })  
-    }, []);
+    function renderRecipes() {
+        if (recipes.length > 1) {
 
-    function renderRecipes(){
-        return(
-            recipes.map(recipe=>{
-                let recipeId = recipe.id;
-                let recipeDetails = recipe.recipe;
-                return(
-                    <Grid item xs={12} sm={6} md={3} key={recipeId}>
-                        <RecipeCard className="recipeContainer"  recipeId= {recipeId} recipe={recipeDetails} />
-                    </Grid>
-                )
-            })
-            
-        )
+            if (searchWord.length > 1) {
+                recipes = recipes.filter(r => {
+                    let recipeName = r.recipe.recipeName.toLowerCase();
+                    return recipeName.includes(searchWord);
+                });
+            }
+
+            return (
+
+                recipes.map(recipe => {
+                    let recipeId = recipe.id;
+                    let recipeDetails = recipe.recipe;
+                    return (
+                        <Grid item xs={12} sm={6} md={3} key={recipeId}>
+                            <RecipeCard className="recipeContainer" recipeId={recipeId} recipe={recipeDetails} />
+                        </Grid>
+                    )
+                })
+            )
+        }
     }
 
-    return(
-        // recipes.map(r => <p>{r.id}</p>)
+    return (
         <Grid
             className='recipesGrid'
             container
@@ -38,13 +41,13 @@ function RecipesGrid() {
             alignItems="center"
             item spacing={2}
         >
-           {renderRecipes()}
+            {renderRecipes()}
         </Grid>
     )
-        
-        
-        
-    
+
+
+
+
 }
 
 export default RecipesGrid;
