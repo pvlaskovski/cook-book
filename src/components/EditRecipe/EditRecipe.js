@@ -21,6 +21,10 @@ function EditRecipe(props) {
     const [type, setType] = useState('');
     const [difficulty, setDifficulty] = useState('');
     const [recipe, setRecipe] = useState({});
+    const [title, setTitle] = useState("");
+    const [summary, setSummary] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
+
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
@@ -29,6 +33,7 @@ function EditRecipe(props) {
     const handleDifficultyChange = (e) => {
         setDifficulty(e.target.value);
     };
+
 
     const submitRecipe = function(){
         let formData = new FormData(document.querySelector('form'));
@@ -70,19 +75,24 @@ function EditRecipe(props) {
                 setRecipe(res);
                 setType(res.recipeType);
                 setDifficulty(res.recipeDifficulty);
+                setTitle(res.recipeName);
+                setSummary(res.recipeSummary);
+                setImgUrl(res.recipeImageUrl);
                 console.log("Recipe is loaded:");
-                console.log(res);
+                console.log(res.recipeImageUrl);
+
             })
     }, []);
 
     return (
 
         <Container className="container" component="form">
+
             <Typography>Edit Recipe</Typography>
-            <TextField id="outlined-basic" variant="outlined" fullWidth name="recipeName" value={recipe ? recipe.recipeName : null}/>
+            <TextField id="outlined-basic" variant="outlined" fullWidth name="recipeName" value={recipe ? title : null} onChange={(e) => setTitle(e.target.value)}/>
 
             <Typography>Overview</Typography>
-            <TextField variant="outlined" fullWidth multiline rows={2} name="recipeOverview" value={recipe ? recipe.recipeSummary : null} />
+            <TextField variant="outlined" fullWidth multiline rows={2} name="recipeOverview" value={recipe ? summary : null} onChange={(e) => setSummary(e.target.value)}/>
 
 
             <Container className="selectContainer">
@@ -139,7 +149,7 @@ function EditRecipe(props) {
             }
 
             <Container className="methodContainer">
-                <TextField id="outlined-basic" variant="outlined" name="imgUrl" value={recipe ? recipe.recipeImageUrl : null} fullWidth />
+                <TextField id="outlined-basic" variant="outlined" name="imgUrl" value={recipe ? imgUrl : null} onChange={(e) => setImgUrl(e.target.value)} fullWidth />
             </Container>
 
             <Button variant="contained" onClick={submitRecipe}>Submit Edit</Button>

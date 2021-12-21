@@ -82,6 +82,7 @@ function RecipeDetails() {
             <h2>{recipe ? recipe.recipeName : null}</h2>
             <span>Author and date and time</span>
 
+            <p>{recipe ? recipe.recipeSummary : null}</p>
             <Container className="container">
                 <Box className="containerSection">
                     <p>Ingredients</p>
