@@ -19,7 +19,6 @@ function RecipesGrid(
             }
 
             return (
-
                 recipes.map(recipe => {
                     let recipeId = recipe.id;
                     let recipeDetails = recipe.recipe;
