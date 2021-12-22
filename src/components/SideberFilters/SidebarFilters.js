@@ -4,49 +4,9 @@ import { useState } from 'react';
 
 import './SidebarFilters.css';
 
-function SidebarFilters() {
-
-    const [typeFilters, setTypeFilters] = useState([]);
-    const [difficultyFilters, setDifficultyFilters] = useState([]); 
-
-    const handleChange = (event) => {
-        let filter = event.target.name;
-        let isChecked = event.target.checked;
-        console.log({filter, isChecked});
-    };
-
-    const handleGroupChange = (event, group)=>{
-        let checkboxGroup = group;
-        let checkboxName = event.target.name;
-        let checkboxIsChecked = Boolean(event.target.checked);
-
-        if (checkboxGroup == "type") {
-
-            if (checkboxIsChecked) {
-                setTypeFilters(typeFilters => (
-                    [...typeFilters, checkboxName]
-                ));
-
-            }else{
-                setTypeFilters(typeFilters => (
-                    typeFilters.filter(x => x !== checkboxName)
-                ));
-            }
-        
-            console.log(typeFilters);
-
-        }else if( checkboxGroup == "difficulty"){
-            if (checkboxIsChecked) {
-                setDifficultyFilters(difficultyFilters => (
-                    [...difficultyFilters, checkboxName]
-                ));
-            }else{
-                setDifficultyFilters(difficultyFilters => (
-                    difficultyFilters.filter(x => x !== checkboxName)
-                ));
-            }
-        }    
-    }
+function SidebarFilters({
+    handleGroupChange
+}) {
 
     return (
         <Box className="sidebarFilters">
