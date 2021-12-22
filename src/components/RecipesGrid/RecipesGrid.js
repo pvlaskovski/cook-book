@@ -5,8 +5,9 @@ import firebaseService from '../../services/firebase';
 import { useEffect, useState } from 'react';
 
 function RecipesGrid(
-    { recipes, searchWord }
+    { recipes, searchWord, typeFilters, difficultyFilters }
 ) {
+
 
     function renderRecipes() {
         if (recipes.length > 1) {
@@ -18,6 +19,22 @@ function RecipesGrid(
                 });
             }
 
+            if (typeFilters.length > 0) {
+                recipes = recipes.filter( r => {
+                    let recipeType = r.recipe.recipeType.toLowerCase();
+                    return typeFilters.includes(recipeType);
+                });
+            }
+
+            if (difficultyFilters.length > 0) {
+                recipes = recipes.filter( r => {
+                    let recipeDifficulty= r.recipe.recipeDifficulty.toLowerCase();
+                    return difficultyFilters.includes(recipeDifficulty);
+                });
+            }
+           
+
+
             return (
                 recipes.map(recipe => {
                     let recipeId = recipe.id;
@@ -28,6 +45,7 @@ function RecipesGrid(
                         </Grid>
                     )
                 })
+
             )
         }
     }

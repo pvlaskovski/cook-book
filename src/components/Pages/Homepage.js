@@ -18,8 +18,6 @@ function Homepage(props){
     const [typeFilters, setTypeFilters] = useState([]);
     const [difficultyFilters, setDifficultyFilters] = useState([]); 
 
-
-
     useEffect(() => {
         firebaseService.getAllRecipes()
             .then(res=> {
@@ -77,6 +75,8 @@ function Homepage(props){
             <RecipesGrid className="recipesGrid" 
                 recipes={recipes} 
                 searchWord={searchWord}
+                typeFilters={typeFilters}
+                difficultyFilters={difficultyFilters}
             />
         </Box>
     )
