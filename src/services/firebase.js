@@ -111,6 +111,7 @@ const firebaseService = {
     getAllRecipes,
     getRecipeById,
     updateRecipe,
+    deleteRecipeById
 }
 
 export default firebaseService;

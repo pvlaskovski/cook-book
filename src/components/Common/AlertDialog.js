@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { useState } from 'react';
 
-export default function AlertDialog({open, handleClose}) {
+export default function AlertDialog({open, handleClose, handleDelete}) {
 
 
   return (
@@ -28,9 +28,7 @@ export default function AlertDialog({open, handleClose}) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>No</Button>
-          <Button onClick={handleClose} autoFocus>
-            Yes
-          </Button>
+          <Button onClick={handleDelete} autoFocus>Yes</Button>
         </DialogActions>
       </Dialog>
     </div>

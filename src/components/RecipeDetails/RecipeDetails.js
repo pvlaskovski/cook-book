@@ -7,23 +7,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit'; 
 
-import { useState } from "react";
+import { useState, } from "react";
 import './RecipeDetails.css';
 import CustomRating from "../CustomRating/CustomRating";
 import AlertDialog from "../Common/AlertDialog";
 import firebaseService from "../../services/firebase";
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
     const [recipe, setRecipe] = useState();
     const [open, setOpen] = useState();
 
+    const navigate = useNavigate();
     let { recipeId } = useParams();
-    
+
     useEffect(() => {
         firebaseService.getRecipeById(recipeId)
         .then(res=> {
@@ -34,7 +36,6 @@ function RecipeDetails() {
     function handleFavouriteClick (){
         setFavourite(!favourite);
     }
-
 
     function renderIngredients(){
         return(
@@ -67,6 +68,19 @@ function RecipeDetails() {
         setOpen(false);
       };
 
+      const handleDelete = () => {
+        if (open) {
+            try {
+                firebaseService.deleteRecipeById(recipeId);
+                toast.success('Successfully deleted recipe');
+                navigate('/');
+            } catch (error) {
+                toast.error("Unable to delete recipe");
+            }
+        }
+        setOpen(false);
+      }
+
     return (
 
         <Paper className="paper" >
@@ -74,6 +88,7 @@ function RecipeDetails() {
             <AlertDialog
                 open={open}
                 handleClose={handleModalClose}
+                handleDelete={handleDelete}
             />
 
             <Box className="topAvatarsContainer">
