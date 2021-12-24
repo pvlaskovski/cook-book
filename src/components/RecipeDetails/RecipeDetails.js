@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { Container, Paper, Button, Grid, Typography, ListItem, ListItemAvatar, ListItemText, Divider } from "@mui/material";
+import { Container, Paper, Button, Grid, Typography, ListItem, ListItemAvatar, ListItemText, Divider, TextField } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -142,7 +142,19 @@ function RecipeDetails() {
                     </Box>
 
                 </Container>
-                <CustomRating />
+
+                <Container >
+                    <TextField
+                        label="Add comment"
+                        name="addComent"
+                        variant="outlined"
+                        multiline rows={2}
+                        fullWidth
+                    />
+                    <CustomRating />
+                    <Button variant="outlined">Add comment</Button>
+                </Container>
+
             </Paper>
 
             <Container>
