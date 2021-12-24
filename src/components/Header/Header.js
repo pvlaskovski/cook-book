@@ -39,7 +39,7 @@ function Header() {
                         : renderLoggedOutButtons()
                     } 
                     {/* Buttons visible for logged in and out users */}
-                    <Button color="inherit" component={Link} to="/recipes">Recipes</Button>
+                    <Button color="inherit" component={Link} to="/">Recipes</Button>
 
                 </Toolbar>
             </AppBar>
