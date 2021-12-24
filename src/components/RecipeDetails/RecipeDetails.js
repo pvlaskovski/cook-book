@@ -3,12 +3,14 @@ import { Container, Paper, Button } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit'; 
 
 import { useState } from "react";
 import './RecipeDetails.css';
 import CustomRating from "../CustomRating/CustomRating";
+import AlertDialog from "../Common/AlertDialog";
 import firebaseService from "../../services/firebase";
 
 import { useParams, Link } from "react-router-dom";
@@ -18,20 +20,21 @@ import { useEffect } from "react";
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
     const [recipe, setRecipe] = useState();
-
-    function handleFavouriteClick (){
-        setFavourite(!favourite);
-    }
+    const [open, setOpen] = useState();
 
     let { recipeId } = useParams();
     
     useEffect(() => {
         firebaseService.getRecipeById(recipeId)
-            .then(res=> {
-                setRecipe(res);
-                
-            })
+        .then(res=> {
+            setRecipe(res);      
+        })
     }, []);
+    
+    function handleFavouriteClick (){
+        setFavourite(!favourite);
+    }
+
 
     function renderIngredients(){
         return(
@@ -56,14 +59,34 @@ function RecipeDetails() {
         )
     }
 
+    const handleModalOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleModalClose = () => {
+        setOpen(false);
+      };
+
     return (
 
         <Paper className="paper" >
+
+            <AlertDialog
+                open={open}
+                handleClose={handleModalClose}
+            />
+
             <Box className="topAvatarsContainer">
                 <Box className="avatarsContainer">
                     <Avatar className="avatar">
                         <Button className="editButton" component={Link} to="edit">
                             <EditIcon/>
+                        </Button>
+                    </Avatar>
+
+                    <Avatar className="avatar">
+                        <Button className="deleteButton" onClick={handleModalOpen}>
+                            <DeleteIcon/>
                         </Button>
                     </Avatar>
 
@@ -105,7 +128,6 @@ function RecipeDetails() {
             <CustomRating />
 
         </Paper>
-
     )
 }
 
