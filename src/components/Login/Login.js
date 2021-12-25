@@ -17,20 +17,23 @@ export default function SignUp(props) {
         const data = new FormData(event.currentTarget);
         
         const email = data.get('email');
-        const password = data.get('password')
+        const password = data.get('password');
 
         firebaseService.login(email, password)
             .then(res => {
                 const user = res.user;
                 let email = user.email;
                 let uid = user.uid;
+
                 login({ email, uid });
+
                 toast.success("Welcome " + email);
+
                 navigate('/');
             })
             .catch(err=>{
                 toast.error("Incorrect username or password");
-            })  
+            }); 
     };
 
     return (
