@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { Container, Paper, Button, Grid, Typography, ListItem, ListItemAvatar, ListItemText, Divider, TextField } from "@mui/material";
+import { Container, Paper, Button, Grid, Typography, ListItem, ListItemAvatar, ListItemText, Divider, TextField, List } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -19,6 +19,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import AddComment from "./AddComment";
+import Comment from "./Comment";
 
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
@@ -83,9 +84,9 @@ function RecipeDetails() {
         setOpen(false);
     };
 
-   
 
-    function getRating (rating) {
+
+    function getRating(rating) {
         console.log(rating);
     }
 
@@ -93,7 +94,6 @@ function RecipeDetails() {
         <Box>
 
             <Paper className="paper" >
-
                 <AlertDialog
                     open={open}
                     handleClose={handleModalClose}
@@ -150,10 +150,10 @@ function RecipeDetails() {
 
                 </Container>
 
-                 {recipe 
-                    ? <AddComment recipe={recipe} recipeId={recipeId}/>
+                {recipe
+                    ? <AddComment recipe={recipe} recipeId={recipeId} />
                     : null
-                }                   
+                }
 
             </Paper>
 
@@ -168,34 +168,14 @@ function RecipeDetails() {
                 </Grid>
 
                 {/* Comment start */}
+                <List>
+                    {recipe
+                        ? recipe.recipeComments?.map(comment => <Comment comment={comment} />)
+                        : null
+                    }
 
-                <ListItem key={""} alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="avatar" src={""} />
-                    </ListItemAvatar>
 
-                    <ListItemText
-                        primary={
-                            <Typography >
-                                Author name
-                            </Typography>
-                        }
-                        secondary={
-                            <>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    color="textPrimary"
-                                >
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt odio massa, nec aliquam urna fringilla ac. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam orci odio, ullamcorper id dictum et, bibendum quis dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse felis nulla, fermentum vitae elit a, blandit condimentum nunc.
-                                </Typography>
-                                <CustomRating />
-                            </>
-                        }
-                    />
-                </ListItem>
-                <Divider />
-
+                </List>
                 {/* Comment end */}
 
 

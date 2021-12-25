@@ -2,28 +2,34 @@ import { Container, TextField, Button } from "@mui/material";
 import CustomRating from "../CustomRating/CustomRating";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 import firebaseService from "../../services/firebase";
 import toast from "react-hot-toast";
+import userService from "../../services/userService";
 
 export default function AddComment({
-    recipe,
     recipeId
 }) {
     const [value, setValue] = useState(3);
+    const { user } = useAuthContext();
+    let navigate = useNavigate();
 
-    const handleAddCommentClick = () => {
+    const handleAddCommentClick = async() => {
         let formData = new FormData(document.querySelector('form'));
         let rating = value;
         let comment = formData.get("comment");
-        let author = "";
 
         if (rating == null) {
             rating = 0;
         }
 
+        let author = await userService.getUserById(user.uid);
+        let authorName = author.firstName + " " + author.lastName;
+
         try {
-            firebaseService.addComment(recipeId, {comment, rating});
+            firebaseService.addComment(recipeId, {authorName, comment, rating});
             toast.success("Comment added");
         } catch (error) {
             console.log("Unable to add comment");

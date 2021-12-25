@@ -14,8 +14,23 @@ const addUser = async function (userId, userData) {
     }
 }
 
+const getUserById = async function (userId){
+    const docRef = doc(db, "users", userId);
+
+    const user = await getDoc(docRef);
+
+    if (user.exists()) {
+        console.log("User data:", user.data());
+    } else {
+        console.log("No such user!");
+    }
+
+    return user.data();
+}
+
 const userService = {
     addUser,
+    getUserById
 }
 
 export default userService;
