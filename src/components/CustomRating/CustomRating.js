@@ -5,7 +5,6 @@ import StarIcon from '@mui/icons-material/Star';
 
 import './CustomRating.css';
 
-
 const labels = {
     1: 'Average',
     2: 'Above Average',
@@ -14,8 +13,11 @@ const labels = {
     5: 'Amazing',
 };
 
-function CustomRating() {
-    const [value, setValue] = React.useState(2);
+function CustomRating({
+    value,
+    updateRatingValue,
+}) {
+    
     const [hover, setHover] = React.useState(-1);
 
     return (
@@ -26,10 +28,12 @@ function CustomRating() {
             }}
         >
             <Rating
+                id="rating"
                 name="hover-feedback"
                 value={value}
                 onChange={(event, newValue) => {
-                    setValue(newValue);
+                    // setValue(newValue);
+                    updateRatingValue(newValue);
                 }}
                 onChangeActive={(event, newHover) => {
                     setHover(newHover);

@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import firebaseConfig from '../config/firebase';
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc } from "firebase/firestore"; 
+import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc, arrayUnion } from "firebase/firestore"; 
 import toast from 'react-hot-toast';
 
 const app = initializeApp(firebaseConfig);
@@ -102,6 +102,16 @@ const getRecipeById = async function (recipeId) {
     return docSnap.data();
 }
 
+const addComment =  async function (recipeId, comment){
+
+    const recipeRef = doc(db, "recepies", recipeId);
+
+    await updateDoc(recipeRef, {
+        recipeComments: arrayUnion(comment)
+    });
+}
+
+
 const firebaseService = {
     auth,
     login,
@@ -111,7 +121,8 @@ const firebaseService = {
     getAllRecipes,
     getRecipeById,
     updateRecipe,
-    deleteRecipeById
+    deleteRecipeById,
+    addComment
 }
 
 export default firebaseService;

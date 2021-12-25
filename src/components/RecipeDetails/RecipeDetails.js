@@ -18,6 +18,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import AddComment from "./AddComment";
 
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
@@ -59,7 +60,7 @@ function RecipeDetails() {
                 )
             })
         )
-    }
+    };
 
     const handleModalOpen = () => {
         setOpen(true);
@@ -80,6 +81,12 @@ function RecipeDetails() {
             }
         }
         setOpen(false);
+    };
+
+   
+
+    function getRating (rating) {
+        console.log(rating);
     }
 
     return (
@@ -143,17 +150,10 @@ function RecipeDetails() {
 
                 </Container>
 
-                <Container >
-                    <TextField
-                        label="Add comment"
-                        name="addComent"
-                        variant="outlined"
-                        multiline rows={2}
-                        fullWidth
-                    />
-                    <CustomRating />
-                    <Button variant="outlined">Add comment</Button>
-                </Container>
+                 {recipe 
+                    ? <AddComment recipe={recipe} recipeId={recipeId}/>
+                    : null
+                }                   
 
             </Paper>
 
