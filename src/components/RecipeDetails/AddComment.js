@@ -4,6 +4,7 @@ import CustomRating from "../CustomRating/CustomRating";
 import { useState } from "react";
 
 import firebaseService from "../../services/firebase";
+import toast from "react-hot-toast";
 
 export default function AddComment({
     recipe,
@@ -15,26 +16,15 @@ export default function AddComment({
         let formData = new FormData(document.querySelector('form'));
         let rating = value;
         let comment = formData.get("comment");
+        let author = "";
 
         if (rating == null) {
             rating = 0;
         }
 
-        let recipeComments;
         try {
-            recipeComments = recipe.recipeComments;
-            console.log("PRE ADDING: " + recipeComments);
-            recipeComments = recipeComments.push({comment, rating});
-        } catch (error) {
-            recipeComments = [{comment, rating}];
-        }
-        
-        
-
-        try {
-            // firebaseService.updateRecipe(recipeId, {...recipe, recipeComments}).then(res => console.log(res));
             firebaseService.addComment(recipeId, {comment, rating});
-            console.log("Commented");
+            toast.success("Comment added");
         } catch (error) {
             console.log("Unable to add comment");
         }
