@@ -7,11 +7,11 @@ import { useNavigate } from "react-router";
 import toast from 'react-hot-toast';
 
 function Logout(props){
-    const {logout} = useAuthContext();
+    // const {logout} = useAuthContext();
     const navigate = useNavigate();
     useEffect(()=>{
         firebaseService.logout();
-        logout();
+        // logout();
         navigate('/');
     }, []);
 

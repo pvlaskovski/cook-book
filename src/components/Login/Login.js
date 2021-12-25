@@ -21,14 +21,11 @@ export default function SignUp(props) {
 
         firebaseService.login(email, password)
             .then(res => {
-                const user = res.user;
-                let email = user.email;
-                let uid = user.uid;
-
-                login({ email, uid });
-
+                // const user = res.user;
+                // let email = user.email;
+                // let uid = user.uid;
+                // login({ email, uid });
                 toast.success("Welcome " + email);
-
                 navigate('/');
             })
             .catch(err=>{
