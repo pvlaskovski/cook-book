@@ -20,6 +20,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { useAuthContext } from '../../contexts/AuthContext';
+import userService from '../../services/userService';
 
 
 
@@ -74,6 +75,9 @@ export default function Register(props) {
         
         const email = data.get('email');
         const password = data.get('password');
+        const firstName = data.get("firstName");
+        const lastName = data.get("lastName");
+
         const acceptedTerms = Boolean(data.get('checkboxTerms'));
       
         if(acceptedTerms){
@@ -84,6 +88,11 @@ export default function Register(props) {
                     let newUserUid = user.uid;
 
                     toast.success(`${email} registered succesfully!`);
+
+                    userService.addUser(
+                        newUserUid,
+                        {email, password, firstName, lastName}
+                    )
                     
                     login({
                         email: newUserEmail,
@@ -94,6 +103,8 @@ export default function Register(props) {
                 .catch(error=>{
                     toast.error(error.message);
                 })
+
+            
         }else{
             toast.error("Please accept terms and conditions to register!")
         }
