@@ -22,8 +22,6 @@ function InsertIngredients(props) {
     const handleItemsChange = function (e, index) {
         const { name, value } = e.target;
         const list = [...itemsList];
-        console.log(list);
-        console.log(`Addind ${value} on idex ${index}`);
         
         list[index][name] = value;
         setItemsList(list);

@@ -17,24 +17,67 @@
 }
 
 .select {
-    min-width: 300px;
+    min-width: 200px;
     width: 50%;
     margin: auto;
     margin-bottom: 1em;
 }
 
-.insertIngredient{
-    min-width: 200px;
-    width: 45%;
-    margin: auto;
-    margin-bottom: 1em;
-}
+
 
 .addItem{
     margin: auto;
 }
 
+.stepsContainer{
+    padding: 0;
+}
+
+.stepContainer{
+    padding: 0;
+}
+
 .step{
     margin-bottom: 1em;
+    padding: 0;
 }
+
+.buttonHover {
+    margin-bottom: 0.9em;
+    margin-right: 0.9em;
+}
+
+/* Ingredients style */
+
+.ingredientContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0;
+}
+
+.buttonContainer{
+    width: 10%;
+    min-width: 64px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.inputFields{
+    width: 85%;
+    min-width: 100px;
+    padding: 0;
+    margin-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.insertIngredient{    
+    margin: auto;
+    margin-bottom: 1em;
+    width: 50%;
+    min-width: 150px;
+    
+}
+
 

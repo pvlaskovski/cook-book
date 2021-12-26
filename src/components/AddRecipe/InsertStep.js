@@ -32,7 +32,7 @@ function InsertStep(props) {
         return stepsList.map((step, index) => {
         
             return(
-                <Container key={index.toString()}>
+                <Container className="stepContainer" key={index.toString()}>
                     <ButtonHover 
                         index={index}
                         handleDeleteClick={handleDeleteClick}
@@ -56,7 +56,7 @@ function InsertStep(props) {
     }
 
     return(
-        <Container>
+        <Container className="stepsContainer">
             {renderSteps()}
             <Typography align="left">
                 <Button className="addItem "variant="outlined" onClick={handleAddClick}>Add Step</Button>
