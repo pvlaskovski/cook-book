@@ -5,14 +5,11 @@ import { Button, TextField, Grid, Box, Typography, Container } from '@mui/materi
 import toast from 'react-hot-toast';
 
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/AuthContext';
 
 import './Login.css';
 
 export default function SignUp(props) {
     let navigate = useNavigate();
-
-    const {login} = useAuthContext();
  
     const handleSubmit = (event) => {
         event.preventDefault();

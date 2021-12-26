@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { TextField, Button, Container, Typography, Divider, Box } from "@mui/material";
+import { TextField, Button, Container, Typography, Divider } from "@mui/material";
 import ButtonHover from './ButtonHover.js';
 
 function InsertStep(props) {
 
-    const [stepsList, setStepsList] = useState(props.steps || Array(2).fill(null));
+    const [stepsList, setStepsList] = useState(props.steps || Array(2).fill(""));
 
     const handleAddClick = function () {
         let newList = stepsList.slice();
@@ -28,7 +28,7 @@ function InsertStep(props) {
     }
 
     const renderSteps = function () {
-        console.log(stepsList);
+        // console.log(stepsList);
         return stepsList.map((step, index) => {
         
             return(

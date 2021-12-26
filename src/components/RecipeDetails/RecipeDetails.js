@@ -1,7 +1,6 @@
 import { Box } from "@mui/system";
-import { Container, Paper, Button, Grid, Typography, CircularProgress, ListItem, ListItemAvatar, ListItemText, Divider, TextField, List } from "@mui/material";
+import { Container, Paper, Button, Grid, Typography, CircularProgress, List } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
-import FolderIcon from '@mui/icons-material/Folder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -24,7 +23,7 @@ import Comment from "./Comment";
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
     const [recipe, setRecipe] = useState();
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const [commentAdded, setCommentAdded] = useState(false);
 
     const navigate = useNavigate();
@@ -36,7 +35,7 @@ function RecipeDetails() {
             .then(res => {
                 setRecipe(res);
             })
-    }, [commentAdded]);
+    }, [recipeId]);
 
     function handleAddedComment() {
         setCommentAdded(!commentAdded);
@@ -81,9 +80,9 @@ function RecipeDetails() {
 
     function renderSteps() {
         return (
-            recipe.recipeSteps.map(step => {
+            recipe.recipeSteps.map((step, index) => {
                 return (
-                    <li key={step + Date.now()}>{step}</li>
+                    <li key={index}>{step}</li>
                 )
             })
         )
@@ -153,26 +152,25 @@ function RecipeDetails() {
                     </Box>
                 </Box>
 
-                <h2>{recipe ? recipe.recipeName : null}</h2>
-                <span>Author and date and time</span>
+                <Typography variant="h5" align="center" component="h2">{recipe ? recipe.recipeName : null}</Typography>
 
-                <p>{recipe ? recipe.recipeSummary : null}</p>
+                <Typography>{recipe ? recipe.recipeSummary : null}</Typography>
                 <Container className="container">
                     <Box className="containerSection">
-                        <p>Ingredients</p>
+                        <Typography>Ingredients</Typography>
                         <ul>
                             {recipe ? renderIngredients() : null}
                         </ul>
                     </Box>
                     <Box className="containerSection">
-                        <p>Steps</p>
+                        <Typography>Steps</Typography>
                         <ol>
                             {recipe ? renderSteps() : null}
                         </ol>
                     </Box>
 
                     <Box className="imageContainer">
-                        <img className="image" src={recipe ? recipe.recipeImageUrl : null} />
+                        <img className="image" alt={recipe ? recipe.recipeName : "Recipe"} src={recipe ? recipe.recipeImageUrl : null} />
                     </Box>
 
                 </Container>
@@ -200,7 +198,7 @@ function RecipeDetails() {
 
                 <List>
                     {recipe
-                        ? recipe.recipeComments?.map(comment => <Comment comment={comment} />)
+                        ? recipe.recipeComments?.map((comment, index) => <Comment key={index} comment={comment} />)
                         : null
                     }
                 </List>

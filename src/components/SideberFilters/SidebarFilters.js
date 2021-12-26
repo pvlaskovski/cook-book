@@ -1,6 +1,5 @@
 import { FormGroup, FormControlLabel, Checkbox, FormLabel } from '@mui/material';
 import { Box } from '@mui/system';
-import { useState } from 'react';
 
 import './SidebarFilters.css';
 

@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import firebaseService from '../../services/firebase';
-import { useContext } from "react";
-import { AuthContext, useAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
 
-import toast from 'react-hot-toast';
-
-function Logout(props){
-    // const {logout} = useAuthContext();
+function Logout(props) {
     const navigate = useNavigate();
-    useEffect(()=>{
+
+    useEffect(() => {
         firebaseService.logout();
-        // logout();
         navigate('/');
-    }, []);
+    }, [navigate]);
 
     return null;
 }

@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import firebaseConfig from '../config/firebase';
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -14,7 +14,7 @@ const addUser = async function (userId, userData) {
     }
 }
 
-const getUserById = async function (userId){
+const getUserById = async function (userId) {
     const docRef = doc(db, "users", userId);
 
     const user = await getDoc(docRef);

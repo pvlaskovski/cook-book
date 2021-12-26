@@ -1,8 +1,6 @@
 import { Grid } from '@mui/material';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import './RecipesGrid.css';
-import firebaseService from '../../services/firebase';
-import { useEffect, useState } from 'react';
 
 function RecipesGrid(
     { recipes, searchWord, typeFilters, difficultyFilters }
@@ -33,8 +31,6 @@ function RecipesGrid(
                 });
             }
            
-
-
             return (
                 recipes.map(recipe => {
                     let recipeId = recipe.id;
@@ -61,10 +57,6 @@ function RecipesGrid(
             {renderRecipes()}
         </Grid>
     )
-
-
-
-
 }
 
 export default RecipesGrid;

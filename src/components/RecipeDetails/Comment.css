@@ -1,0 +1,14 @@
+.commentContainer{
+    flex-wrap: wrap;
+}
+.itemText{
+    display: block;
+}
+
+.secondatyText{
+    font-style: italic;
+}
+
+.rating{
+    padding-left: 1em;
+}

@@ -1,42 +1,53 @@
-import { ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider, Rating, Box } from "@mui/material"
-import CustomRating from "../CustomRating/CustomRating"
+import { ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Divider, Rating, Box, ListItemIcon, Container } from "@mui/material"
 
-export default function Comment({comment}) {
+import './Comment.css'
+
+export default function Comment({ comment }) {
 
     return (
-        <ListItem key={""} alignItems="flex-start">
+        <ListItem alignItems="flex-start" className="commentContainer">
             <ListItemAvatar>
                 <Avatar alt="avatar" src={""} />
             </ListItemAvatar>
 
             <ListItemText
                 primary={
-                    <Typography >
-                        {comment.authorName 
-                        ? comment.authorName
-                        : "Anonymous Author"
+                    <Typography
+                        component="span"
+                        variant="body1"
+                        color="textPrimary"
+                        className="itemText"
+                    >
+                        {comment.authorName
+                            ? comment.authorName
+                            : "Anonymous Author"
                         }
-                        
                     </Typography>
                 }
                 secondary={
-                    <>
                         <Typography
                             component="span"
                             variant="body2"
                             color="textPrimary"
+                            className="itemText, secondatyText"
                         >
                             {comment.comment}
                         </Typography>
-                        <Box>
-                            <Rating name="read-only" value={comment.rating} readOnly />
-                        </Box>
-                        <Divider />
-                    </>
                 }
             />
 
-            
+            <Container>
+                <Rating name="read-only" value={comment.rating} className="rating" readOnly />
+                <Divider />
+            </Container>
+
+
+            {/* <Box>
+                <Rating name="read-only" value={comment.rating} readOnly />
+            </Box>
+
+            <Divider /> */}
+
         </ListItem>
     )
 

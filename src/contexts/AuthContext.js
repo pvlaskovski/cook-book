@@ -1,6 +1,6 @@
 // FIREBASE AUTH CONTEXT
 
-import { useState, createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebaseConfig from "../config/firebase";
@@ -20,7 +20,7 @@ const initialAuthState = {
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useLocalStorage('user', initialAuthState);
     const value = { user };
-    console.log(user);
+    // console.log(user);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => { // detaching the listener

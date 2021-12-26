@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography, Divider } from '@mui/material';
+import { FormControl, InputLabel, Container, TextField, Select, MenuItem, Button, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,6 @@ import InsertStep from './InsertStep';
 
 import parseIngredients from '../../helpers/parseIngredients';
 import toast from 'react-hot-toast';
-import userService from '../../services/userService';
 
 function AddRecipe() {
     const [type, setType] = useState('');

@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography } from '@mui/material';
+import { FormControl, InputLabel, Container, TextField, Select, MenuItem, Button, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -82,7 +82,7 @@ function EditRecipe(props) {
                 console.log(res.recipeImageUrl);
 
             })
-    }, []);
+    }, [recipeId]);
 
     return (
 

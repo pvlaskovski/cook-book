@@ -2,11 +2,10 @@ import { Toolbar, AppBar, Button } from '@mui/material';
 import { Link } from "react-router-dom";
 import './Header.css';
 
-import { AuthContext, useAuthContext } from '../../contexts/AuthContext';
-import { useContext } from 'react';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 function Header() {
-    const {user} = useAuthContext();
+    const { user } = useAuthContext();
 
     function renderLoggedOutButtons() {
         return (
@@ -20,7 +19,7 @@ function Header() {
     function renderLoggedInButtons() {
         return (
             <>
-                <span>Welcome {user.email}</span>   
+                <span>Welcome {user.email}</span>
                 <Button color="inherit" component={Link} to="/logout">Logout</Button>
                 <Button color="inherit" component={Link} to="/addRecipe">Add Recipe</Button>
             </>
@@ -31,13 +30,13 @@ function Header() {
         <header>
             <AppBar className="header">
                 <Toolbar className="toolbar-logo">
-                <Link to="/"><h1 className="logo">Put logo here</h1></Link>
+                    <Link to="/"><h1 className="logo">Put logo here</h1></Link>
                 </Toolbar>
                 <Toolbar className="toolbar-nav">
-                    {user.email 
+                    {user.email
                         ? renderLoggedInButtons()
                         : renderLoggedOutButtons()
-                    } 
+                    }
                     {/* Buttons visible for logged in and out users */}
                     <Button color="inherit" component={Link} to="/">Recipes</Button>
 

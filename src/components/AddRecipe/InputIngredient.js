@@ -8,12 +8,13 @@ function InputIngredient({
    item,
    handleItemsChange
 }) {
+   
+    console.log("render");
     return (
         <Container className="ingredientContainer">
             <ButtonHover
                 index={index}
                 handleDeleteClick={handleDeleteClick}
-                
             />
 
             <TextField

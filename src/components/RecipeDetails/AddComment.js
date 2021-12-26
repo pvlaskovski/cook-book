@@ -2,7 +2,6 @@ import { Container, TextField, Button } from "@mui/material";
 import CustomRating from "../CustomRating/CustomRating";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 import firebaseService from "../../services/firebase";
@@ -15,7 +14,6 @@ export default function AddComment({
 }) {
     const [value, setValue] = useState(3);
     const { user } = useAuthContext();
-    const navigate = useNavigate();
 
     const handleAddCommentClick = async() => {
         let formData = new FormData(document.querySelector('form'));
