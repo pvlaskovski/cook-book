@@ -25,8 +25,14 @@ export default function AddComment({
             rating = 0;
         }
 
-        let author = await userService.getUserById(user.uid);
-        let authorName = author.firstName + " " + author.lastName;
+        let authorName = "";
+        try {
+            let author = await userService.getUserById(user.uid);
+            authorName = author.firstName + " " + author.lastName;
+        } catch (error) {
+            console.log("Comment added anonymously");
+        }
+    
 
         try {
             firebaseService.addComment(recipeId, {authorName, comment, rating});

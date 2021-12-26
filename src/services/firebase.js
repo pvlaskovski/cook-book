@@ -122,7 +122,7 @@ const firebaseService = {
     getRecipeById,
     updateRecipe,
     deleteRecipeById,
-    addComment
+    addComment,
 }
 
 export default firebaseService;

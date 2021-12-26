@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
 
+import { useAuthContext } from "../../contexts/AuthContext";
 
 import { useState, } from "react";
 import './RecipeDetails.css';
@@ -28,6 +29,7 @@ function RecipeDetails() {
 
     const navigate = useNavigate();
     let { recipeId } = useParams();
+    const { user } = useAuthContext();
 
     useEffect(() => {
         firebaseService.getRecipeById(recipeId)
@@ -150,13 +152,14 @@ function RecipeDetails() {
 
                 </Container>
 
-                {recipe
+                {(recipe && user.uid)
                     ? <AddComment recipe={recipe} recipeId={recipeId} />
                     : null
                 }
 
             </Paper>
 
+            {/* Comment start */}
             <Container>
 
                 <Grid container justify="space-between">
@@ -167,19 +170,14 @@ function RecipeDetails() {
                     </Grid>
                 </Grid>
 
-                {/* Comment start */}
                 <List>
                     {recipe
                         ? recipe.recipeComments?.map(comment => <Comment comment={comment} />)
                         : null
                     }
-
-
                 </List>
-                {/* Comment end */}
-
-
             </Container>
+            {/* Comment end */}
 
         </Box>
     )
