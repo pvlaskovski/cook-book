@@ -2,7 +2,8 @@ import RecipesGrid from "../RecipesGrid/RecipesGrid";
 import SidebarFilters from "../SideberFilters/SidebarFilters";
 
 import { Box } from "@mui/system";
-import { Button, TextField, Container } from "@mui/material";
+import { Button, TextField, Container, CircularProgress } from "@mui/material";
+
 
 import firebaseService from '../../services/firebase';
 
@@ -10,27 +11,26 @@ import { useEffect, useState } from 'react';
 
 import './Homepage.css';
 
-function Homepage(props){
+function Homepage(props) {
 
-    const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState();
     const [searchWord, setSearchWord] = useState("");
-
     const [typeFilters, setTypeFilters] = useState([]);
-    const [difficultyFilters, setDifficultyFilters] = useState([]); 
+    const [difficultyFilters, setDifficultyFilters] = useState([]);
 
     useEffect(() => {
         firebaseService.getAllRecipes()
-            .then(res=> {
+            .then(res => {
                 setRecipes(res);
-            })  
+            })
     }, []);
 
-    const handleSearchClick = () =>{
-       let word = document.getElementById("search").value;
-       setSearchWord(word.toLowerCase());
+    const handleSearchClick = () => {
+        let word = document.getElementById("search").value;
+        setSearchWord(word.toLowerCase());
     }
 
-    const handleGroupChange = (event, group)=>{
+    const handleGroupChange = (event, group) => {
         let checkboxGroup = group;
         let checkboxName = event.target.name;
         let checkboxIsChecked = Boolean(event.target.checked);
@@ -42,42 +42,61 @@ function Homepage(props){
                     [...typeFilters, checkboxName]
                 ));
 
-            }else{
+            } else {
                 setTypeFilters(typeFilters => (
                     typeFilters.filter(x => x !== checkboxName)
                 ));
             }
 
-        }else if( checkboxGroup == "difficulty"){
+        } else if (checkboxGroup == "difficulty") {
             if (checkboxIsChecked) {
                 setDifficultyFilters(difficultyFilters => (
                     [...difficultyFilters, checkboxName]
                 ));
-            }else{
+            } else {
                 setDifficultyFilters(difficultyFilters => (
                     difficultyFilters.filter(x => x !== checkboxName)
                 ));
             }
-        }    
+        }
     }
 
-    {console.log("Render")}
-    return(
+    const renderRecipes = () => {
+        if (recipes) {
+            if (recipes.length > 0) {
+                return (
+                    <RecipesGrid 
+                        className="recipesGrid"
+                        recipes={recipes}
+                        searchWord={searchWord}
+                        typeFilters={typeFilters}
+                        difficultyFilters={difficultyFilters} />
+                )
+            }else{
+                return(
+                    <p>No recipes</p>
+                )
+            }       
+        }
+        return <CircularProgress/> 
+    }
+
+
+    return (
         <Box className="homepageMainContainer">
-            <Container>
-                <TextField id="search" label="Search recipe" type="search" name="search" fullWidth/>
-                <Button variant="contained" onClick={handleSearchClick}>Search</Button>
+            <Container className="searchContainer">
+                <TextField id="search" label="Search recipe" type="search" name="search" className="searchInput" fullWidth/>
+                <Button variant="contained" className="searchButton" onClick={handleSearchClick}>Search</Button>
             </Container>
 
             <SidebarFilters
+                className="sidebarFiltersContainer"
                 handleGroupChange={handleGroupChange}
             />
-            <RecipesGrid className="recipesGrid" 
-                recipes={recipes} 
-                searchWord={searchWord}
-                typeFilters={typeFilters}
-                difficultyFilters={difficultyFilters}
-            />
+            <Container className="recipesContainer">
+                {renderRecipes()}
+            </Container>
+            
         </Box>
     )
 }

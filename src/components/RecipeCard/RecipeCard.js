@@ -10,7 +10,7 @@ import { CardActionArea, Card, CardHeader, CardMedia, CardContent, CardActions, 
 function RecipeCard({recipeId, recipe}) {
 
     return (
-        <Card>
+        <Card className="recipeContainer">
             <CardActionArea component={RouterLink} to={`recipe/${recipeId}`}>
                     <CardHeader
                         avatar={
@@ -30,7 +30,7 @@ function RecipeCard({recipeId, recipe}) {
                     />
                     <CardContent>
                         <Typography variant="body2" color="text.secondary">
-                            {recipe.recipeSummary}
+                            {recipe.recipeSummary.substring(0,120)}
                         </Typography>
                     </CardContent>     
             </CardActionArea>

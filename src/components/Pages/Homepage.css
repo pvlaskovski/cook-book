@@ -1,14 +1,38 @@
 .homepageMainContainer{
+    width: 100%;
+    margin: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+}
+
+.searchContainer{
+    max-width: 100%;
+    margin: 1em 0;
+}
+
+.searchInput{
+   width: 80%;
+}
+
+.searchButton{
+    height: 100%;
 }
 
 .sidebarFilters{
-    width: 15%;
+    width: 20%;
 }
 
-.recipesGrid{
-    width: 85%;
+.recipesContainer{
+    width: 70%;
+    display: flex;
+}
+
+.recipesGrid {
+    justify-content: start;
+    align-items: stretch;
+}
+
+.recipeContainer{
+    height: 100%;
 }

@@ -6,10 +6,12 @@ import AllRoutes from './components/AllRoutes/AllRoutes';
 
 import { AuthProvider } from './contexts/AuthContext';
 
+import './App.css';
+
 function App() {
     return (
         <AuthProvider>
-            <div className="App">
+            <div className="app">
                 <div>
                     <Toaster />
                 </div>
