@@ -9,10 +9,12 @@
 .searchContainer{
     max-width: 100%;
     margin: 1em 0;
+    text-align: center;
 }
 
 .searchInput{
    width: 80%;
+   max-width: 800px;
 }
 
 .searchButton{
@@ -27,6 +29,7 @@
 .recipesContainer{
     width: 70%;
     display: flex;
+    margin: 0;
 }
 
 .recipesGrid {
@@ -36,4 +39,5 @@
 
 .recipeContainer{
     height: 100%;
+    margin: 0;
 }

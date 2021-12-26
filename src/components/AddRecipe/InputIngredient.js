@@ -9,13 +9,15 @@ function InputIngredient({
    handleItemsChange
 }) {
     return (
-        <Container>
+        <Container className="ingredientContainer">
             <ButtonHover
                 index={index}
                 handleDeleteClick={handleDeleteClick}
+                
             />
 
             <TextField
+                required
                 name="ingredient"
                 value={item.ingredient}
                 label="Ingredient"

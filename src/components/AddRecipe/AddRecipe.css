@@ -1,6 +1,6 @@
 .container{
     width: 80%;
-    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 .container > *{
@@ -9,7 +9,7 @@
 
 .selectContainer,
 .ingredientsContainer,
-.methodContainer{
+.stepsContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -24,7 +24,7 @@
 }
 
 .insertIngredient{
-    min-width: 300px;
+    min-width: 200px;
     width: 45%;
     margin: auto;
     margin-bottom: 1em;
@@ -37,3 +37,4 @@
 .step{
     margin-bottom: 1em;
 }
+

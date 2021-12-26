@@ -12,6 +12,8 @@ export default function ButtonHover({
             onClick={()=>handleDeleteClick(index)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            variant="contained"
+            className="buttonHover"
         >
             { isHovered? 'X' : index + 1}
         </Button>

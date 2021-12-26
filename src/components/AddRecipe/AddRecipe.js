@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography } from '@mui/material';
+import { FormControl, InputLabel, Input, FormHelperText, Container, TextField, Select, MenuItem, Button, Box, Typography, Divider } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ import InsertStep from './InsertStep';
 
 import parseIngredients from '../../helpers/parseIngredients';
 import toast from 'react-hot-toast';
+import userService from '../../services/userService';
 
 function AddRecipe() {
     const [type, setType] = useState('');
@@ -27,7 +28,7 @@ function AddRecipe() {
         setDifficulty(e.target.value);
     };
 
-    const submitRecipe = function () {
+    const submitRecipe = async function () {
         let formData = new FormData(document.querySelector('form'));
 
         let recipeType = type;
@@ -37,7 +38,7 @@ function AddRecipe() {
         let recipeIngredientsNames = formData.getAll('ingredient');
         let recipeIngredientsQuantities = formData.getAll('quantity');
         let recipeIngredients = parseIngredients(recipeIngredientsNames, recipeIngredientsQuantities);   
-        let recipeSteps = formData.getAll('step');
+        let recipeSteps = formData.getAll('step').filter(s => s !== "");
         let recipeImageUrl = formData.get('imgUrl');
 
         let recipe = {
@@ -51,6 +52,7 @@ function AddRecipe() {
             recipeImageUrl,
         }
 
+
         try {
             firebaseService.addRecipe(recipe);
             toast.success(`Added recipe: ${recipeName}`);
@@ -63,17 +65,16 @@ function AddRecipe() {
 
     return (
 
-        <Container className="container" component="form">
+        <Container className="container" component="form" onSubmit={submitRecipe}>
 
-            <Typography>Add Recipe</Typography>
-            <TextField id="outlined-basic" label="Add a Recipe" variant="outlined" fullWidth name="recipeName" />
+            <Typography component="h1" variant='h5'>Add Recipe</Typography>
+            <TextField id="outlined-basic" label="Recipe name" variant="outlined" fullWidth name="recipeName" required />
 
-            <Typography>Short Overview</Typography>
-            <TextField label="Add overview" variant="outlined" fullWidth multiline rows={2} name="recipeOverview" />
+            <TextField label="Add overview" variant="outlined" fullWidth multiline rows={2} name="recipeOverview" required/>
 
             <Container className="selectContainer">
 
-                <FormControl className="select" >
+                <FormControl className="select" required>
                     <InputLabel id="type">Type</InputLabel>
                     <Select
                         labelId="type"
@@ -88,7 +89,7 @@ function AddRecipe() {
                     </Select>
                 </FormControl>
 
-                <FormControl className="select" >
+                <FormControl className="select" required>
                     <InputLabel id="difficulty" >Difficulty</InputLabel>
                     <Select
                         labelId="difficulty"
@@ -105,25 +106,23 @@ function AddRecipe() {
 
             </Container>
 
-            <Typography component="p">Add Ingredient</Typography>
+            <Typography component="p">Add Ingredients</Typography>
             <Container className="ingredientsContainer">
                 <InsertIngredients />
             </Container>
 
             <Typography component="p">Add Steps</Typography>
-            <Container className="methodContainer">
+            <Container className="stepsContainer">
                 <InsertStep />
             </Container>
 
-            <Container className="methodContainer">
+            <Container className="stepsContainer">
                 <TextField id="outlined-basic" label="Image Url" variant="outlined" name="imgUrl" fullWidth />
             </Container>
 
-            <Button variant="contained" onClick={submitRecipe}>Submit</Button>
+            <Button variant="contained" type="submit">Submit</Button>
 
         </Container>
-
-
     )
 }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Button, Container } from "@mui/material";
+import { TextField, Button, Container, Typography, Divider, Box } from "@mui/material";
 import ButtonHover from './ButtonHover.js';
 
 function InsertStep(props) {
@@ -56,10 +56,13 @@ function InsertStep(props) {
     }
 
     return(
-        <>
+        <Container>
             {renderSteps()}
-            <Button className="addItem "variant="outlined" onClick={handleAddClick}>Add Step</Button>
-        </>
+            <Typography align="left">
+                <Button className="addItem "variant="outlined" onClick={handleAddClick}>Add Step</Button>
+            </Typography>
+            <Divider sx={{mt: 1}}/>
+        </Container>
     )
 }
 

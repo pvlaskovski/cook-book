@@ -1,25 +1,28 @@
 import { useState } from "react";
-import { TextField, Button, Container } from "@mui/material";
+import { TextField, Button, Container, Typography, Divider } from "@mui/material";
 import ButtonHover from './ButtonHover.js';
 import InputIngredient from "./InputIngredient.js";
 
 function InsertIngredients(props) {
 
-    const [itemsList, setItemsList] = useState( props.ingredients ||
-        [
-            {
-                ingredient: "",
-                quantity: "",
-            },
-            {
-                ingredient: "",
-                quantity: "",
-            },
-            {
-                ingredient: "",
-                quantity: "",
-            }
-        ]
+    const [itemsList, setItemsList] = useState( props.ingredients || Array(2).fill( {
+        ingredient: "",
+        quantity: "",
+    })
+        // [
+        //     {
+        //         ingredient: "",
+        //         quantity: "",
+        //     },
+        //     {
+        //         ingredient: "",
+        //         quantity: "",
+        //     },
+        //     {
+        //         ingredient: "",
+        //         quantity: "",
+        //     }
+        // ]
     );
 
     const handleAddClick = function () {
@@ -53,7 +56,12 @@ function InsertIngredients(props) {
                     />
                 )
             })}
-            <Button className="addItem " variant="outlined" onClick={handleAddClick}>Add Item</Button>
+
+            <Typography align="left">
+                <Button className="addItem " variant="outlined" onClick={handleAddClick}>Add Item</Button>
+            </Typography>
+            <Divider sx={{mt: 1}}/>
+            
         </Container>
     )
 
