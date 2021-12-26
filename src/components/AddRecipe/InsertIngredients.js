@@ -1,29 +1,19 @@
 import { useState } from "react";
-import { TextField, Button, Container, Typography, Divider } from "@mui/material";
-import ButtonHover from './ButtonHover.js';
+import { Button, Container, Typography, Divider } from "@mui/material";
 import InputIngredient from "./InputIngredient.js";
 
 function InsertIngredients(props) {
 
-    const [itemsList, setItemsList] = useState( props.ingredients || Array(2).fill( {
-        ingredient: "",
-        quantity: "",
-    })
-        // [
-        //     {
-        //         ingredient: "",
-        //         quantity: "",
-        //     },
-        //     {
-        //         ingredient: "",
-        //         quantity: "",
-        //     },
-        //     {
-        //         ingredient: "",
-        //         quantity: "",
-        //     }
-        // ]
-    );
+    const [itemsList, setItemsList] = useState( props.ingredients ||  [
+        {
+            ingredient: "",
+            quantity: "",
+        },
+        {
+            ingredient: "",
+            quantity: "",
+        } 
+    ]);
 
     const handleAddClick = function () {
         setItemsList([...itemsList, { ingredient: "", quantity: "" }]);
@@ -32,6 +22,9 @@ function InsertIngredients(props) {
     const handleItemsChange = function (e, index) {
         const { name, value } = e.target;
         const list = [...itemsList];
+        console.log(list);
+        console.log(`Addind ${value} on idex ${index}`);
+        
         list[index][name] = value;
         setItemsList(list);
     };
@@ -49,6 +42,7 @@ function InsertIngredients(props) {
             {itemsList.map((x,i)=>{
                 return(
                     <InputIngredient
+                        key={i}
                         index={i}
                         handleDeleteClick={handleDeleteClick}
                         item={x}
