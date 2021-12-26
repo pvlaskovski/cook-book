@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { Container, Paper, Button, Grid, Typography, ListItem, ListItemAvatar, ListItemText, Divider, TextField, List } from "@mui/material";
+import { Container, Paper, Button, Grid, Typography, CircularProgress, ListItem, ListItemAvatar, ListItemText, Divider, TextField, List } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -11,7 +11,6 @@ import { useAuthContext } from "../../contexts/AuthContext";
 
 import { useState, } from "react";
 import './RecipeDetails.css';
-import CustomRating from "../CustomRating/CustomRating";
 import AlertDialog from "../Common/AlertDialog";
 import firebaseService from "../../services/firebase";
 
@@ -39,13 +38,34 @@ function RecipeDetails() {
             })
     }, [commentAdded]);
 
-    function handleAddedComment(){
+    function handleAddedComment() {
         setCommentAdded(!commentAdded);
     }
 
     function handleFavouriteClick() {
         setFavourite(!favourite);
     }
+
+    const handleModalOpen = () => {
+        setOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = () => {
+        if (open) {
+            try {
+                firebaseService.deleteRecipeById(recipeId);
+                toast.success('Successfully deleted recipe');
+                navigate('/');
+            } catch (error) {
+                toast.error("Unable to delete recipe");
+            }
+        }
+        setOpen(false);
+    };
 
     function renderIngredients() {
         return (
@@ -69,36 +89,55 @@ function RecipeDetails() {
         )
     };
 
-    const handleModalOpen = () => {
-        setOpen(true);
-    };
+    function renderActionIcons() {
+        let isAuthor = recipe.userUid == user.uid;
+        let isLogged = user.uid != "";
 
-    const handleModalClose = () => {
-        setOpen(false);
-    };
+        if (isAuthor) {
+            return (
+                <>
+                    <Avatar className="avatar">
+                        <Button className="editButton" component={Link} to="edit">
+                            <EditIcon />
+                        </Button>
+                    </Avatar>
 
-    const handleDelete = () => {
-        if (open) {
-            try {
-                firebaseService.deleteRecipeById(recipeId);
-                toast.success('Successfully deleted recipe');
-                navigate('/');
-            } catch (error) {
-                toast.error("Unable to delete recipe");
-            }
+                    <Avatar className="avatar">
+                        <Button className="deleteButton" onClick={handleModalOpen}>
+                            <DeleteIcon />
+                        </Button>
+                    </Avatar>
+                    <Avatar className="avatar">
+                        <Button className="favButton" onClick={handleFavouriteClick}>
+                            {
+                                favourite
+                                    ? <FavoriteIcon className="icon" />
+                                    : <FavoriteBorderIcon className="icon" />
+                            }
+                        </Button>
+                    </Avatar>
+                </>
+            )
+        } else if (isLogged) {
+            return (
+                <Avatar className="avatar">
+                    <Button className="favButton" onClick={handleFavouriteClick}>
+                        {
+                            favourite
+                                ? <FavoriteIcon className="icon" />
+                                : <FavoriteBorderIcon className="icon" />
+                        }
+                    </Button>
+                </Avatar>
+            )
         }
-        setOpen(false);
-    };
 
+        return null;
 
-
-    function getRating(rating) {
-        console.log(rating);
     }
 
-    return (
-        <Box>
-
+    function renderRecipes() {
+        return (
             <Paper className="paper" >
                 <AlertDialog
                     open={open}
@@ -108,27 +147,9 @@ function RecipeDetails() {
 
                 <Box className="topAvatarsContainer">
                     <Box className="avatarsContainer">
-                        <Avatar className="avatar">
-                            <Button className="editButton" component={Link} to="edit">
-                                <EditIcon />
-                            </Button>
-                        </Avatar>
 
-                        <Avatar className="avatar">
-                            <Button className="deleteButton" onClick={handleModalOpen}>
-                                <DeleteIcon />
-                            </Button>
-                        </Avatar>
+                        {renderActionIcons()}
 
-                        <Avatar className="avatar">
-                            <Button className="favButton" onClick={handleFavouriteClick}>
-                                {
-                                    favourite
-                                        ? <FavoriteIcon className="icon" />
-                                        : <FavoriteBorderIcon className="icon" />
-                                }
-                            </Button>
-                        </Avatar>
                     </Box>
                 </Box>
 
@@ -157,13 +178,16 @@ function RecipeDetails() {
                 </Container>
 
                 {(recipe && user.uid)
-                    ? <AddComment recipeId={recipeId} handleAddedComment={handleAddedComment}/>
+                    ? <AddComment recipeId={recipeId} handleAddedComment={handleAddedComment} />
                     : null
                 }
 
             </Paper>
+        )
+    }
 
-            {/* Comment start */}
+    function renderComments() {
+        return (
             <Container>
 
                 <Grid container justify="space-between">
@@ -181,8 +205,20 @@ function RecipeDetails() {
                     }
                 </List>
             </Container>
-            {/* Comment end */}
+        )
+    }
 
+    return (
+        <Box>
+            {recipe
+                ? renderRecipes()
+                : <Typography align="center" sx={{ mt: 5 }}><CircularProgress /></Typography>
+            }
+
+            {recipe
+                ? renderComments()
+                : null
+            }
         </Box>
     )
 }

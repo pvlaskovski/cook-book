@@ -2,7 +2,7 @@ import RecipesGrid from "../RecipesGrid/RecipesGrid";
 import SidebarFilters from "../SideberFilters/SidebarFilters";
 
 import { Box } from "@mui/system";
-import { Button, TextField, Container, CircularProgress } from "@mui/material";
+import { Button, TextField, Container, CircularProgress, Typography } from "@mui/material";
 
 
 import firebaseService from '../../services/firebase';
@@ -78,7 +78,7 @@ function Homepage(props) {
                 )
             }       
         }
-        return <CircularProgress/> 
+        return <Typography align="center" sx={{ mt: 5 }}><CircularProgress /></Typography>
     }
 
 
