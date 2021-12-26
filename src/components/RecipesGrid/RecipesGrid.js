@@ -40,7 +40,7 @@ function RecipesGrid(
                     let recipeId = recipe.id;
                     let recipeDetails = recipe.recipe;
                     return (
-                        <Grid item xs={12} sm={12} md={6} lg={4} xl={4} key={recipeId}>
+                        <Grid item xs={12} sm={12} md={6} lg={4} xl={3} key={recipeId}>
                             <RecipeCard recipeId={recipeId} recipe={recipeDetails} />
                         </Grid>
                     )

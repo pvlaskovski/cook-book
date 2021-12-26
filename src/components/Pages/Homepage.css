@@ -1,5 +1,5 @@
 .homepageMainContainer{
-    width: 100%;
+    width: 95%;
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -21,6 +21,7 @@
 
 .sidebarFilters{
     width: 20%;
+    max-width: 200px;
 }
 
 .recipesContainer{

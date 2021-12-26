@@ -18,9 +18,7 @@ function RecipeCard({recipeId, recipe}) {
                                 R
                             </Avatar>
                         }
-
                         title={(recipe.recipeName)? recipe.recipeName : 'No name'}
-                        subheader="September 14, 2016"
                     />
                     <CardMedia
                         component="img"

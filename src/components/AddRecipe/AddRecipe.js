@@ -10,6 +10,7 @@ import InsertIngredients from './InsertIngredients';
 import InsertStep from './InsertStep';
 
 import parseIngredients from '../../helpers/parseIngredients';
+import toast from 'react-hot-toast';
 
 function AddRecipe() {
     const [type, setType] = useState('');
@@ -29,15 +30,13 @@ function AddRecipe() {
     const submitRecipe = function () {
         let formData = new FormData(document.querySelector('form'));
 
-        let recipeName = formData.get("recipeName");
-        let recipeSummary = formData.get("recipeOverview");
         let recipeType = type;
         let recipeDifficulty = difficulty;
-        
+        let recipeName = formData.get("recipeName");
+        let recipeSummary = formData.get("recipeOverview");
         let recipeIngredientsNames = formData.getAll('ingredient');
         let recipeIngredientsQuantities = formData.getAll('quantity');
-        let recipeIngredients = parseIngredients(recipeIngredientsNames, recipeIngredientsQuantities);
-        
+        let recipeIngredients = parseIngredients(recipeIngredientsNames, recipeIngredientsQuantities);   
         let recipeSteps = formData.getAll('step');
         let recipeImageUrl = formData.get('imgUrl');
 
@@ -54,9 +53,10 @@ function AddRecipe() {
 
         try {
             firebaseService.addRecipe(recipe);
+            toast.success(`Added recipe: ${recipeName}`);
             navigate('/');
         } catch (error) {
-
+            toast.error("Unable to add recipe");
         }
     }
 
@@ -70,7 +70,6 @@ function AddRecipe() {
 
             <Typography>Short Overview</Typography>
             <TextField label="Add overview" variant="outlined" fullWidth multiline rows={2} name="recipeOverview" />
-
 
             <Container className="selectContainer">
 
@@ -103,20 +102,6 @@ function AddRecipe() {
                         <MenuItem value="Hard">Hard</MenuItem>
                     </Select>
                 </FormControl>
-
-                {/* <SelectDropdown
-                    label="Type"
-                    handleChange={handleTypeChange}
-                    dropdownItems={["Soups", "Deserts", "Main" ]}
-                    
-                /> */}
-
-                {/* <SelectDropdown
-                    label="Difficulty"
-                    handleChange={handleDifficultyChange}
-                    dropdownItems={["Easy", "Medium", "Hard"]}
-                /> */}
-
 
             </Container>
 

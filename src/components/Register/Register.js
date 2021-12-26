@@ -113,11 +113,10 @@ export default function Register(props) {
     };
 
     return (
-        <Container component="div" maxWidth="xs" >
+        <Container component="div" maxWidth="xs" className="registerContainer">
             <Box >
-                <Avatar />
 
-                <Typography component="h1" variant="h5">Register</Typography>
+                <Typography component="h1" variant="h5" align="center" >Register</Typography>
 
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>

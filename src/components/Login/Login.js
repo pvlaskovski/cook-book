@@ -7,6 +7,8 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 
+import './Login.css';
+
 export default function SignUp(props) {
     let navigate = useNavigate();
 
@@ -34,7 +36,7 @@ export default function SignUp(props) {
     };
 
     return (
-        <Container component="div" maxWidth="xs" >
+        <Container component="div" maxWidth="xs" className='loginContainer' >
             <Box >
 
                 <Typography component="h1" variant="h5" align="center">Log in</Typography>
