@@ -7,8 +7,8 @@ const useLocalStorage = (key, initialValue)=>{
             let item = localStorage.getItem(key);
     
             return item 
-            ? JSON.parse(item) 
-            : initialValue;
+                ? JSON.parse(item) 
+                : initialValue;
         } catch (error) {
             return initialValue;   
         }
@@ -22,7 +22,6 @@ const useLocalStorage = (key, initialValue)=>{
         } catch (error) {
             console.log(error);
         }
-
     }
 
     return[

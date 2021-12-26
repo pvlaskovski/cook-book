@@ -5,6 +5,8 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import firebaseConfig from "../config/firebase";
 
+import useLocalStorage from '../hooks/useLocalStorage';
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -16,13 +18,11 @@ const initialAuthState = {
 };
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(initialAuthState);
+    const [user, setUser] = useLocalStorage('user', initialAuthState);
     const value = { user };
-
     console.log(user);
 
     useEffect(() => {
-        console.log(user);
         const unsubscribe = onAuthStateChanged(auth, (user) => { // detaching the listener
             if (user) {
                 let email = user.email;
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
                 setUser(initialAuthState);
             }
         });
-        return () => unsubscribe(); // unsubscribing from the listener when the component is unmounting. 
+        return () => unsubscribe();
     }, []);
 
     return (
