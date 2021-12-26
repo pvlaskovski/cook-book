@@ -10,11 +10,12 @@ import toast from "react-hot-toast";
 import userService from "../../services/userService";
 
 export default function AddComment({
-    recipeId
+    recipeId,
+    handleAddedComment,
 }) {
     const [value, setValue] = useState(3);
     const { user } = useAuthContext();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleAddCommentClick = async() => {
         let formData = new FormData(document.querySelector('form'));
@@ -35,8 +36,10 @@ export default function AddComment({
     
 
         try {
-            firebaseService.addComment(recipeId, {authorName, comment, rating});
-            toast.success("Comment added");
+            firebaseService.addComment(recipeId, {authorName, comment, rating}).then(e=>{
+                handleAddedComment();
+                toast.success("Comment added");
+            })
         } catch (error) {
             console.log("Unable to add comment");
         }

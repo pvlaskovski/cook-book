@@ -26,6 +26,7 @@ function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
     const [recipe, setRecipe] = useState();
     const [open, setOpen] = useState();
+    const [commentAdded, setCommentAdded] = useState(false);
 
     const navigate = useNavigate();
     let { recipeId } = useParams();
@@ -36,7 +37,11 @@ function RecipeDetails() {
             .then(res => {
                 setRecipe(res);
             })
-    }, []);
+    }, [commentAdded]);
+
+    function handleAddedComment(){
+        setCommentAdded(!commentAdded);
+    }
 
     function handleFavouriteClick() {
         setFavourite(!favourite);
@@ -51,7 +56,6 @@ function RecipeDetails() {
                     <li key={ingredient + Date.now()}>{ingredient}: {quantity}</li>
                 )
             })
-
         )
     }
 
@@ -153,7 +157,7 @@ function RecipeDetails() {
                 </Container>
 
                 {(recipe && user.uid)
-                    ? <AddComment recipe={recipe} recipeId={recipeId} />
+                    ? <AddComment recipeId={recipeId} handleAddedComment={handleAddedComment}/>
                     : null
                 }
 
