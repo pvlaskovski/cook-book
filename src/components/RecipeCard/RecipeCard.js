@@ -8,9 +8,12 @@ import toast from 'react-hot-toast';
 
 
 
-function RecipeCard({recipeId, recipe}) {
+function RecipeCard({
+    recipeId,
+    recipe 
+}) {
 
-    function copyLink(){
+    function copyLink() {
         let link = window.location.href + "recipe/" + recipeId;
         navigator.clipboard.writeText(link);
         toast.success("Link copied");
@@ -19,25 +22,25 @@ function RecipeCard({recipeId, recipe}) {
     return (
         <Card className="recipeContainer">
             <CardActionArea component={RouterLink} to={`recipe/${recipeId}`}>
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                R
-                            </Avatar>
-                        }
-                        title={(recipe.recipeName)? recipe.recipeName : 'No name'}
-                    />
-                    <CardMedia
-                        component="img"
-                        height="194"
-                        image={recipe.recipeImageUrl}
-                        alt={recipe.recipeName}
-                    />
-                    <CardContent>
-                        <Typography variant="body2" color="text.secondary">
-                            {recipe.recipeSummary.substring(0,120)}
-                        </Typography>
-                    </CardContent>     
+                <CardHeader
+                    avatar={
+                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                            R
+                        </Avatar>
+                    }
+                    title={(recipe.recipeName) ? recipe.recipeName : 'No name'}
+                />
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={recipe.recipeImageUrl}
+                    alt={recipe.recipeName}
+                />
+                <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                        {recipe.recipeSummary.substring(0, 120)}
+                    </Typography>
+                </CardContent>
             </CardActionArea>
 
             <CardActions disableSpacing>
@@ -45,11 +48,11 @@ function RecipeCard({recipeId, recipe}) {
                     <FavoriteIcon />
                 </IconButton>
 
-                <IconButton 
+                <IconButton
                     aria-label="share"
                     onClick={copyLink}
                 >
-                    <ShareIcon/>
+                    <ShareIcon />
                 </IconButton>
 
             </CardActions>

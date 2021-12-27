@@ -81,7 +81,11 @@ function Homepage(props) {
                 )
             }       
         }
-        return <Typography align="center" sx={{ mt: 5 }}><CircularProgress /></Typography>
+        return (
+            <Container>
+                <Typography align="center" sx={{ mt: 5 }}><CircularProgress /></Typography>
+            </Container>
+        )
     }
 
 
