@@ -24,6 +24,9 @@ export default function AllRoutes() {
                 <Route path="/addRecipe" element={<AddRecipe />} />
                 <Route path="recipe/:recipeId/edit" element={<EditRecipe />} />
             </Route>
+
+            <Route element={<Homepage />} path="*" />
+
         </Routes>
     )
 }
