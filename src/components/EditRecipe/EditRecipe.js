@@ -78,8 +78,8 @@ function EditRecipe(props) {
                 setTitle(res.recipeName);
                 setSummary(res.recipeSummary);
                 setImgUrl(res.recipeImageUrl);
-                console.log("Recipe is loaded:");
-                console.log(res.recipeImageUrl);
+                // console.log("Recipe is loaded:");
+                // console.log(res.recipeImageUrl);
 
             })
     }, [recipeId]);
