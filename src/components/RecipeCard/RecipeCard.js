@@ -44,10 +44,6 @@ function RecipeCard({
             </CardActionArea>
 
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-
                 <IconButton
                     aria-label="share"
                     onClick={copyLink}

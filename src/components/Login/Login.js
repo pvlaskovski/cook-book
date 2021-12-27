@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
+import userService from '../../services/userService';
 
 export default function SignUp(props) {
     let navigate = useNavigate();
@@ -19,14 +20,15 @@ export default function SignUp(props) {
         const password = data.get('password');
 
         firebaseService.login(email, password)
-            .then(res => {
-                
+            .then(res => {   
                 toast.success("Welcome " + email);
                 navigate('/');
             })
             .catch(err=>{
                 toast.error("Incorrect username or password");
             }); 
+
+            
     };
 
     return (

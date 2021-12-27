@@ -28,7 +28,7 @@ function Homepage(props) {
     const handleSearchClick = () => {
         let word = document.getElementById("search").value;
         setSearchWord(word.toLowerCase());
-        console.log("Search click");
+        // console.log("Search click");
     }
 
     const handleGroupChange = (event, group) => {

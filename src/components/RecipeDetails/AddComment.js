@@ -39,7 +39,8 @@ export default function AddComment({
                 toast.success("Comment added");
             })
         } catch (error) {
-            console.log("Unable to add comment");
+            toast.error("Unable to add comment");
+            // console.log("Unable to add comment");
         }
 
     };

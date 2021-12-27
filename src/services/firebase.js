@@ -22,11 +22,11 @@ const login = async function (email, password) {
 
 const logout = function(){
     signOut(auth).then(() => {
-        console.log("Signed out");
+        // console.log("Signed out");
         toast.success('Logged out')
       }).catch((error) => {
         toast.error('Couldn not log out');
-        console.log("Some errror");
+        // console.log("Logout errror");
       });
 }
 
@@ -45,9 +45,10 @@ const addRecipe = async function(data){
 
       try {
         const docRef = await addDoc(collection(db, "recepies"), data);
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
+        throw "Error adding recipe";
       }
       // Add a new document in collection "recepies"
 }
@@ -94,9 +95,9 @@ const getRecipeById = async function (recipeId) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
     } else {
-        console.log("No such document!");
+        // console.log("No such document!");
     }
 
     return docSnap.data();
