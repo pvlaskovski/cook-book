@@ -22,9 +22,9 @@ import Comment from "./Comment";
 
 function RecipeDetails() {
     const [favourite, setFavourite] = useState(false);
+    const [commentAdded, setCommentAdded] = useState(false);
     const [recipe, setRecipe] = useState();
     const [open, setOpen] = useState(false);
-    const [commentAdded, setCommentAdded] = useState(false);
 
     const navigate = useNavigate();
     let { recipeId } = useParams();
@@ -35,7 +35,7 @@ function RecipeDetails() {
             .then(res => {
                 setRecipe(res);
             })
-    }, [recipeId]);
+    }, [recipeId, commentAdded]);
 
     function handleAddedComment() {
         setCommentAdded(!commentAdded);
