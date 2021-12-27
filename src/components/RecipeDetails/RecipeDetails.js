@@ -19,11 +19,13 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import AddComment from "./AddComment";
 import Comment from "./Comment";
+import userService from "../../services/userService";
 
 function RecipeDetails() {
-    const [favourite, setFavourite] = useState(false);
+    // const [favourite, setFavourite] = useState(false);
     const [commentAdded, setCommentAdded] = useState(false);
     const [recipe, setRecipe] = useState();
+    const [userFavourites, setUserFavourites] = useState();
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -35,14 +37,39 @@ function RecipeDetails() {
             .then(res => {
                 setRecipe(res);
             })
+            .catch(e => console.log(e))
+
     }, [recipeId, commentAdded]);
+
+    useEffect(() => {
+        userService.getFavouriteRecipes(user.uid)
+            .then(res => {
+                const { favouriteRecipes } = res;
+                setUserFavourites(favouriteRecipes);
+            })
+            .catch(e => console.log(e))
+    }, [user.uid]);
+
+
 
     function handleAddedComment() {
         setCommentAdded(!commentAdded);
     }
 
     function handleFavouriteClick() {
-        setFavourite(!favourite);
+        let newFavourites = userFavourites.slice();
+
+        if (userFavourites.includes(recipeId)) {
+            newFavourites = newFavourites.filter(r => r != recipeId);
+            toast.success("Recipe removed from favourites")
+        } else {
+            newFavourites.push(recipeId);
+            toast.success("Recipe added to favourites")
+        }
+
+        userService.updateFavouriteRecipes(user.uid, newFavourites);
+
+        setUserFavourites(newFavourites);
     }
 
     const handleModalOpen = () => {
@@ -91,6 +118,7 @@ function RecipeDetails() {
     function renderActionIcons() {
         let isAuthor = recipe.userUid == user.uid;
         let isLogged = user.uid != "";
+        let isFavourite = userFavourites?.includes(recipeId);
 
         if (isAuthor) {
             return (
@@ -109,7 +137,7 @@ function RecipeDetails() {
                     <Avatar className="avatar">
                         <Button className="favButton" onClick={handleFavouriteClick}>
                             {
-                                favourite
+                                isFavourite
                                     ? <FavoriteIcon className="icon" />
                                     : <FavoriteBorderIcon className="icon" />
                             }
@@ -122,7 +150,7 @@ function RecipeDetails() {
                 <Avatar className="avatar">
                     <Button className="favButton" onClick={handleFavouriteClick}>
                         {
-                            favourite
+                            isFavourite
                                 ? <FavoriteIcon className="icon" />
                                 : <FavoriteBorderIcon className="icon" />
                         }
