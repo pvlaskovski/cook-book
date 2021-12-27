@@ -28,6 +28,7 @@ function Homepage(props) {
     const handleSearchClick = () => {
         let word = document.getElementById("search").value;
         setSearchWord(word.toLowerCase());
+        console.log("Search click");
     }
 
     const handleGroupChange = (event, group) => {
@@ -74,7 +75,9 @@ function Homepage(props) {
                 )
             }else{
                 return(
-                    <p>No recipes</p>
+                    <Container>
+                        <Typography align="center" variant='h6' sx={{mt:2}}>No recipes found! Go add the first one</Typography>
+                    </Container>
                 )
             }       
         }
@@ -85,7 +88,7 @@ function Homepage(props) {
     return (
         <Box className="homepageMainContainer">
             <Container className="searchContainer">
-                <TextField id="search" label="Search recipe" type="search" name="search" className="searchInput" fullWidth/>
+                <TextField id="search" label="Search recipe" type="search" name="search" className="searchInput"  fullWidth/>
                 <Button variant="contained" className="searchButton" onClick={handleSearchClick}>Search</Button>
             </Container>
 
