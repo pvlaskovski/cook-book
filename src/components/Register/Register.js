@@ -25,8 +25,6 @@ import userService from '../../services/userService';
 
 export default function Register(props) {
 
-    const {login} = useAuthContext();
-
     const [pwStrenght, setPwStrenght] = useState({
         class: null,
         value: 0
@@ -90,17 +88,13 @@ export default function Register(props) {
 
                     userService.addUser(
                         newUserUid,
-                        {email, password, firstName, lastName}
+                        {email, firstName, lastName, favouriteRecipes: []}
                     )
-                    
-                    login({
-                        email: newUserEmail,
-                        uid: newUserUid,
-                    });
+                                       
                     navigate('/');       
                 })
                 .catch(error=>{
-                    toast.error(error.message);
+                    
                 })
 
             
