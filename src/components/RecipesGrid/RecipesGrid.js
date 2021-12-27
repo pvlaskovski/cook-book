@@ -2,11 +2,13 @@ import { Grid } from '@mui/material';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import './RecipesGrid.css';
 
-function RecipesGrid(
-    { recipes, searchWord, typeFilters, difficultyFilters }
-) {
-
-
+function RecipesGrid({
+    recipes,
+    searchWord,
+    typeFilters,
+    difficultyFilters
+}) {
+    
     function renderRecipes() {
         if (recipes.length > 1) {
 
@@ -18,19 +20,19 @@ function RecipesGrid(
             }
 
             if (typeFilters.length > 0) {
-                recipes = recipes.filter( r => {
+                recipes = recipes.filter(r => {
                     let recipeType = r.recipe.recipeType.toLowerCase();
                     return typeFilters.includes(recipeType);
                 });
             }
 
             if (difficultyFilters.length > 0) {
-                recipes = recipes.filter( r => {
-                    let recipeDifficulty= r.recipe.recipeDifficulty.toLowerCase();
+                recipes = recipes.filter(r => {
+                    let recipeDifficulty = r.recipe.recipeDifficulty.toLowerCase();
                     return difficultyFilters.includes(recipeDifficulty);
                 });
             }
-           
+
             return (
                 recipes.map(recipe => {
                     let recipeId = recipe.id;
