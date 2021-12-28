@@ -68,7 +68,6 @@ function RecipeDetails() {
         }
 
         userService.updateFavouriteRecipes(user.uid, newFavourites);
-
         setUserFavourites(newFavourites);
     }
 

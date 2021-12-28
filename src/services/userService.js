@@ -34,7 +34,6 @@ const updateFavouriteRecipes = async function (userId, favouriteRecipes) {
         await updateDoc(userRef, {
             favouriteRecipes: favouriteRecipes
         });
-        // console.log(`Favourite recipes succesfully updated to: ${favouriteRecipes}`);
     } catch (e) {
         throw "Error updating favourite recipes:"
     }
