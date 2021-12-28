@@ -113,11 +113,11 @@ export default function Register(props) {
 
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} md={6}>
                             <TextField name="firstName" id="firstName" label="First Name" required/>
                         </Grid>
 
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} md={6}>
                             <TextField name="lastName" id="lastName" label="Last Name" />
                         </Grid>
 

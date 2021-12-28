@@ -29,3 +29,7 @@ span.medium>span{
 span.strong>span{
     background-color: green;
 }
+
+form{
+    text-align: center;
+}
