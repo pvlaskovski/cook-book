@@ -18,10 +18,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Link as RouterLink } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
-import { useAuthContext } from '../../contexts/AuthContext';
 import userService from '../../services/userService';
-
-
 
 export default function Register(props) {
 

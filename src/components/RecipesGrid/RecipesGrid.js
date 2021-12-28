@@ -47,7 +47,7 @@ function RecipesGrid({
             } else {
                 return (
                     <Container>
-                        <Typography align="center" variant='h6' sx={{mt:2}}>No recipes found please try with another search word!</Typography>
+                        <Typography align="center" variant='h6' sx={{mt:2}}>No recipes found please try with another search!</Typography>
                     </Container>
                 )
             }
