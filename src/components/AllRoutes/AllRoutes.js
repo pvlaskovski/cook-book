@@ -7,7 +7,7 @@ import Logout from '../Logout/Logout';
 import RecipeDetails from '../RecipeDetails/RecipeDetails';
 import AddRecipe from '../AddRecipe/AddRecipe';
 import EditRecipe from '../EditRecipe/EditRecipe';
-import UserInfo from '../UserInfo/UserInfo';
+import UserArea from '../UserArea/UserArea';
 
 import Homepage from '../Pages/Homepage';
 import LoggedInUsersRoutes from '../Common/LoggedInUsersRoutes';
@@ -22,13 +22,12 @@ export default function AllRoutes() {
             <Route path="recipe/:recipeId" element={<RecipeDetails />} />
 
             <Route element={<LoggedInUsersRoutes />}>
-                <Route path="/user" element={<UserInfo />} />
+                <Route path="/user" element={< UserArea />} />
                 <Route path="/addRecipe" element={<AddRecipe />} />
                 <Route path="recipe/:recipeId/edit" element={<EditRecipe />} />
             </Route>
 
             <Route element={<Homepage />} path="*" />
-
         </Routes>
     )
 }

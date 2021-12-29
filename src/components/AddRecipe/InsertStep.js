@@ -30,7 +30,6 @@ function InsertStep(props) {
     const renderSteps = function () {
         // console.log(stepsList);
         return stepsList.map((step, index) => {
-        
             return(
                 <Container className="stepContainer" key={index.toString()}>
                     <ButtonHover 

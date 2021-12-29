@@ -91,7 +91,7 @@ export default function Register(props) {
                     navigate('/');       
                 })
                 .catch(error=>{
-                    
+                    toast.error("Unable to register. Please review the form");
                 })
 
             

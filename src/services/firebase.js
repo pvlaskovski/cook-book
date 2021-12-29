@@ -33,6 +33,7 @@ const logout = function(){
 const register = async function (email, password) {
     try {
             let res = createUserWithEmailAndPassword(auth, email, password);
+            
             return res;
         } catch (error) {
             const errorCode = error.code;

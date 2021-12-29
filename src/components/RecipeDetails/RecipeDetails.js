@@ -23,6 +23,7 @@ import userService from "../../services/userService";
 
 function RecipeDetails() {
     // const [favourite, setFavourite] = useState(false);
+    console.log("Test");
     const [commentAdded, setCommentAdded] = useState(false);
     const [recipe, setRecipe] = useState();
     const [userFavourites, setUserFavourites] = useState();
@@ -159,7 +160,6 @@ function RecipeDetails() {
         }
 
         return null;
-
     }
 
     function renderRecipes() {

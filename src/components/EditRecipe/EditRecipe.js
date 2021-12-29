@@ -78,9 +78,6 @@ function EditRecipe(props) {
                 setTitle(res.recipeName);
                 setSummary(res.recipeSummary);
                 setImgUrl(res.recipeImageUrl);
-                // console.log("Recipe is loaded:");
-                // console.log(res.recipeImageUrl);
-
             })
     }, [recipeId]);
 
@@ -93,7 +90,6 @@ function EditRecipe(props) {
 
             <Typography>Overview</Typography>
             <TextField variant="outlined" fullWidth multiline rows={2} name="recipeOverview" value={recipe ? summary : null} onChange={(e) => setSummary(e.target.value)}/>
-
 
             <Container className="selectContainer">
                 <FormControl className="select" >
