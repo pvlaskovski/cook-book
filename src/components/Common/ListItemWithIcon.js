@@ -9,7 +9,6 @@ export default function ListItemWithIcon({
     return (
         <ListItem className="userDetailItem">
             <ListItemIcon>
-                {/* <FolderIcon /> */}
                 {icon}
             </ListItemIcon>
 

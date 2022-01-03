@@ -1,0 +1,38 @@
+.mainUserContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 70%;
+    margin: 2em auto;
+
+}
+
+.userInfoContainer{
+    text-align: center;
+    margin: auto;
+}
+
+.userAvatar{
+    margin: auto;
+    background-color: gray;
+    width: 50px;
+    height: 50px;
+}
+
+.userDetailItem{
+    width: auto;
+}
+
+.listedRecipesContainer{
+    width: 100%;
+}
+
+.favIcon{
+    color: red;
+    margin-right: 0.2em;
+}
+
+.recipeIcon{
+    color: orange;
+}

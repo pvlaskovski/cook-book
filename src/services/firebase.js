@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, linkWithPopup } from "firebase/auth";
 import firebaseConfig from '../config/firebase';
 import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc, arrayUnion } from "firebase/firestore"; 
+import { collection, addDoc, doc, getDoc, getDocs, setDoc, deleteDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import toast from 'react-hot-toast';
 
 const app = initializeApp(firebaseConfig);
@@ -20,38 +20,38 @@ const login = async function (email, password) {
     }
 }
 
-const logout = function(){
+const logout = function () {
     signOut(auth).then(() => {
         // console.log("Signed out");
         toast.success('Logged out')
-      }).catch((error) => {
+    }).catch((error) => {
         toast.error('Couldn not log out');
         // console.log("Logout errror");
-      });
+    });
 }
 
 const register = async function (email, password) {
     try {
-            let res = createUserWithEmailAndPassword(auth, email, password);
-            
-            return res;
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            throw errorMessage;
-        }
+        let res = createUserWithEmailAndPassword(auth, email, password);
+
+        return res;
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        throw errorMessage;
+    }
 }
 
-const addRecipe = async function(data){
+const addRecipe = async function (data) {
 
-      try {
+    try {
         const docRef = await addDoc(collection(db, "recepies"), data);
         // console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
+    } catch (e) {
         console.error("Error adding document: ", e);
         throw "Error adding recipe";
-      }
-      // Add a new document in collection "recepies"
+    }
+    // Add a new document in collection "recepies"
 }
 
 const updateRecipe = async function (recipeId, data) {
@@ -63,9 +63,9 @@ const updateRecipe = async function (recipeId, data) {
     }
 }
 
-const deleteRecipeById = async function(recipeId){
+const deleteRecipeById = async function (recipeId) {
     try {
-        await deleteDoc(doc(db, "recepies", recipeId)); 
+        await deleteDoc(doc(db, "recepies", recipeId));
     } catch (error) {
         console.error("Error editing document: ", error);
     }
@@ -75,7 +75,7 @@ const getAllRecipes = async function () {
 
     let allRecipes = [];
     const response = await getDocs(collection(db, "recepies"));
-    
+
     response.forEach(recipe => {
         const { id } = recipe;
         const data = recipe.data();
@@ -85,7 +85,7 @@ const getAllRecipes = async function () {
         }
         allRecipes.push(currentRecipe);
     })
-    
+
     return allRecipes;
 }
 
@@ -104,7 +104,17 @@ const getRecipeById = async function (recipeId) {
     return docSnap.data();
 }
 
-const addComment =  async function (recipeId, comment){
+
+const getRecipesById = async function (ids) {
+
+        var promises = ids.map(function(id) {
+            return getRecipeById(id)
+        });
+        return Promise.all(promises);
+  
+}
+
+const addComment = async function (recipeId, comment) {
 
     const recipeRef = doc(db, "recepies", recipeId);
 
@@ -122,6 +132,7 @@ const firebaseService = {
     addRecipe,
     getAllRecipes,
     getRecipeById,
+    getRecipesById,
     updateRecipe,
     deleteRecipeById,
     addComment,
