@@ -1,29 +1,24 @@
-import { List } from "@mui/material";
-import BadgeIcon from '@mui/icons-material/Badge';
-
+import { List, ListItemButton } from "@mui/material";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ListItemWithIcon from "../Common/ListItemWithIcon";
 
-import { useEffect, useState } from "react";
-
-import firebaseService from "../../services/firebase";
+import { Link as RouterLink } from 'react-router-dom';
 
 export default function FavouriteRecipes({
     recipes
 }) {
-
     return (
-        <List className="mainUserContainer">
+        <List>
             {recipes.map(r => {
                 return (
-                    <ListItemWithIcon
-                        key="firstName"
-                        icon={<BadgeIcon />}
-                        primaryText={r.recipeName || 'No recipe name'}
-                    />
+                    <ListItemButton key={r.recipeId} component={RouterLink} to={`/recipe/${r.recipeId}`} >
+                        <ListItemWithIcon
+                            icon={<MenuBookIcon />}
+                            primaryText={r?.recipeName || 'No recipe name'}
+                        />
+                    </ListItemButton>
                 )
             })}
         </List>
-
-
     )
 }

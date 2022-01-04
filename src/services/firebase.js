@@ -101,7 +101,7 @@ const getRecipeById = async function (recipeId) {
         // console.log("No such document!");
     }
 
-    return docSnap.data();
+    return {...docSnap.data(), "recipeId": recipeId};
 }
 
 
